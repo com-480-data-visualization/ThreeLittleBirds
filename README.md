@@ -53,9 +53,11 @@ Bird strikes cost the aviation industry billions and pose safety risks. By overl
 All information presented here is based on the following Notebook: [M1_DataExploration](https://colab.research.google.com/drive/1rXPO2LDDgPRk97wf8cLNTDRRA6dTV_iW?usp=sharing)
 
 **General Information about the Dataset**
+
 The dataset has a size of 190 MB stored as an csv file and comes with an additional excel sheet that explains each column. The first column serves as an index column and tells us that their are 288'810 entries in the table.
 
 **General information about columns**
+
 The dataset contains 110 columns with the following attributes:
 
 | Value   | Number of Columns |
@@ -64,6 +66,7 @@ The dataset contains 110 columns with the following attributes:
 | Boolean | 37                |
 | Integer | 17                |
 | Other*  | 13                |
+
 *e.g. Time and Date
 
 - **Specific Damage Indicators:** A massive portion of the dataset consists of binary (Yes/No) columns indicating exactly which part of the plane was **struck** (e.g., `STR_RAD`, `STR_WING_ROT`) versus which part was actually **damaged** (e.g., `DAM_RAD`, `DAM_FUSE`). This also includes specific columns for engine ingestions (`ING_ENG1` through `ING_ENG4`).
@@ -76,8 +79,9 @@ The dataset contains 110 columns with the following attributes:
 - **Administrative and Narrative Metadata:** Finally, there are columns used for record-keeping, such as `INDEX NR`, `INCIDENT_DATE`, and `SOURCE`, along with unstructured text fields like `REMARKS` and `COMMENTS` that provide qualitative context.
 
 **Missing Data**
-Lets have a look on all the columns that are missing at least some data:
 
+Lets have a look on all the columns that are missing at least some data:
+![alt text](https://github.com/com-480-data-visualization/ThreeLittleBirds/blob/master/data/images/ColumnsWithMissingData.png)
 
 Observations:
 - Most columns that are missing nearly 100% of their values are cost related or very specific that may be empty often (e.g. number of fatalities --> if there were non it makes sense that there is no data on that).
@@ -106,12 +110,15 @@ Notable insights from the table that we have not already seen before:
 - The median time a plane is out of service is 3 hours, but the max is 62,848 hours (over 7 years). This indicates some strikes result in total destruction.
 
 **Insightful Distributions**
+
 Let us look into some specific handpicked numerical distributions that give us more insight into the dataset.
 
-![[Pasted image 20260313161003.png]]
+![alt text](https://github.com/com-480-data-visualization/ThreeLittleBirds/blob/master/data/images/IncidentPerMonth.png)
+
 In this visualization we can already observe when most of the bird strikes happen, which allows us to already create hypothesis on why many of those bird strikes happen so often during the summer months.
 
-![[Pasted image 20260313161526.png]]
+![alt text](https://github.com/com-480-data-visualization/ThreeLittleBirds/blob/master/data/images/IncidentsPerYear.png)
+
 This left skewed distribution shows that there is a positive trend of bird strikes over the past 33 years and it is interesting to observe that some years have much larger spikes of bird strikes than others.
 
 ### Related work
