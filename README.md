@@ -23,7 +23,7 @@ The main dataset for this project is the [Federal Aviation Administration (FAA) 
 
 Although the dataset is comprehensive—with over 100 columns covering species, aircraft type, flight phase, and location—some preprocessing will be required. The main tasks include handling missing or unknown entries (notably for bird species), addressing outliers in numeric variables, and ensuring consistent formatting of location and date fields. Overall, the data quality is strong, and preprocessing will focus on cleaning rather than extensive transformation.
 
-A secondary dataset, [A Global Dataset of Directional Migration Networks of Migratory Birds](https://figshare.com/articles/dataset/A_global_dataset_of_directional_migration_networks_of_migratory_birds/26162269/3?file=48041545) provides migration path information derived from a systematic review of English and Chinese literature (1993–2023). The data already includes curated GPS coordinates, which will allow comparison with FAA incident locations to explore geographic correlations. Preprocessing will mainly involve filtering relevant species and migration routes and aligning coordinate systems with the FAA dataset.
+A complementary dataset, [A Global Dataset of Directional Migration Networks of Migratory Birds](https://figshare.com/articles/dataset/A_global_dataset_of_directional_migration_networks_of_migratory_birds/26162269/3?file=48041545) provides migration path information derived from a systematic review of English and Chinese literature (1993–2023). The data already includes curated GPS coordinates, which will allow comparison with FAA incident locations to explore geographic correlations. Preprocessing will mainly involve filtering relevant species and migration routes and aligning coordinate systems with the FAA dataset.
 
 The main challenge will be integrating these datasets due to potential differences in spatial resolution and taxonomic naming conventions, but overall, both sources are clean and ready for analysis.
 
@@ -81,7 +81,7 @@ The 190 MB CSV contains 288,810 entries across 110 columns. Features include bin
 
 #### Bird FLight Paths
 
-The secondary dataset contains 42,844 entries across 26 columns. It tracks global avian movement via GPS sensor nodes (Origin, Transit, Wintering) and includes full taxonomic classifications (Order, Family, Genus), English names, and IUCN Red List (2023) conservation statuses.
+The complementary dataset contains 42,844 entries across 26 columns. It tracks global avian movement via GPS sensor nodes (Origin, Transit, Wintering) and includes full taxonomic classifications (Order, Family, Genus), English names, and IUCN Red List (2023) conservation statuses.
 
 **Missing Data & Quality**
 
