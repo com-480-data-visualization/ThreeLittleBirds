@@ -53,6 +53,8 @@ Bird strikes pose both economic and safety threats to aviation, causing signific
 
 ### Exploratory Data Analysis
 
+#### Bird Strikes
+
 The 190 MB CSV contains 288,810 entries across 110 columns. Features include binary damage indicators (e.g., struck vs. damaged parts), geography, aircraft specs, flight conditions (speed/altitude), environmental factors (weather/light), wildlife species, and economic costs.
 
 **Missing Data & Quality**
@@ -76,7 +78,26 @@ The 190 MB CSV contains 288,810 entries across 110 columns. Features include bin
 **Notable Trends** 
 
 - Analysis shows a clear seasonal peak in summer and a steady upward trend in reported strikes over the 33-year period.
-_________________________________
+
+#### Bird FLight Paths
+
+The secondary dataset contains 42,844 entries across 26 columns. It tracks global avian movement via GPS sensor nodes (Origin, Transit, Wintering) and includes full taxonomic classifications (Order, Family, Genus), English names, and IUCN Red List (2023) conservation statuses.
+
+**Missing Data & Quality**
+
+- High Integrity: The dataset is exceptionally complete, with only the Provinces column missing a negligible 19 values (<0.05%).
+- Modern Precision: 75% of the data is from 2010 or later, ensuring that the insights are based on modern, high-resolution satellite telemetry rather than legacy banding methods.
+
+**Key Statistical Insights**
+
+- Geography: While coverage is global (spanning from -83° to +78° latitude), the mean latitude of 29.9°N indicates a significant focus on Northern Hemisphere flyways.
+- Timing: Migration is highly bimodal. The Autumn surge (July–September) is the largest movement window, followed by a secondary Spring peak (March–April).
+- Conservation: While 85.4% are "Least Concern," nearly 15% of tracked movements involve at-risk species (Vulnerable to Critically Endangered), providing vital data for protected transit nodes.
+
+**Notable Trends**
+
+The data reveals a massive concentration of activity during the late summer months, identifying a critical temporal window where high bird density and biodiversity risk intersect.
+
 
 ### Related work
 
