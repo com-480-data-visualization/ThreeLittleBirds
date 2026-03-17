@@ -53,6 +53,8 @@ Bird strikes pose both economic and safety threats to aviation, causing signific
 
 ### Exploratory Data Analysis
 
+The exploratiry data analysis has been done in the following notebook: [M1 ThreeLittleBirds](https://colab.research.google.com/drive/1rXPO2LDDgPRk97wf8cLNTDRRA6dTV_iW?usp=sharing)
+
 #### Bird Strikes
 
 The 190 MB CSV contains 288,810 entries across 110 columns. Features include binary damage indicators (e.g., struck vs. damaged parts), geography, aircraft specs, flight conditions (speed/altitude), environmental factors (weather/light), wildlife species, and economic costs.
@@ -93,6 +95,8 @@ The complementary dataset contains 42,844 entries across 26 columns. It tracks g
 - Geography: While coverage is global (spanning from -83° to +78° latitude), the mean latitude of 29.9°N indicates a significant focus on Northern Hemisphere flyways.
 - Timing: Migration is highly bimodal. The Autumn surge (July–September) is the largest movement window, followed by a secondary Spring peak (March–April).
 - Conservation: While 85.4% are "Least Concern," nearly 15% of tracked movements involve at-risk species (Vulnerable to Critically Endangered), providing vital data for protected transit nodes.
+
+![alt text](https://github.com/com-480-data-visualization/ThreeLittleBirds/blob/master/data/images/FrequencyOfMigrationStartsByMonth.png)
 
 **Notable Trends**
 
