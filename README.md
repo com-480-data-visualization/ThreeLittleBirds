@@ -128,3 +128,42 @@ For the complementary dataset we haven't found any usages as it doesn't have any
 - < 24h: 80% of the grade for the milestone
 - < 48h: 70% of the grade for the milestone
 
+## Setup
+
+This project uses Webpack, Babel, and D3.js. To ensure we are all working in the same environment, follow these steps to set up the project locally.
+
+1. Prerequisites
+Ensure you have Node.js installed (LTS version recommended). This includes npm, our package manager.
+
+2. Initial Setup
+Clone the repository and install the dependencies defined in package.json:
+```bash
+# Clone the repo (replace with your actual SSH/HTTPS link)
+git clone https://github.com/com-480-data-visualization/ThreeLittleBirds.git
+
+# Enter the directory
+cd ThreeLittleBirds
+
+# Install all libraries (D3, Leaflet, Webpack, etc.)
+npm install
+```
+
+3. Local Development
+To start the development server with Hot Module Replacement (HMR), run:
+```bash
+npm start # To run on a specific port you can add "-- --port portnumber
+```
+- The site will be available at: http://localhost:8080
+- Any changes you save in src/ will automatically refresh the browser.
+
+4. Project Structure
+- src/main.js: The entry point for our JavaScript.
+- src/index.html: The main HTML template.
+- src/components/: Place individual visualization logic here.
+- src/assets/: Store data files (CSV/JSON) here.
+
+5. Deployment
+We use Continuous Deployment via Vercel.
+- Do not push to master directly.
+- Create a feature branch for your work.
+- Open a Pull Request (PR). Vercel will generate a preview link for your branch so we can review the visualizations live before merging.
