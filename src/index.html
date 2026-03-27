@@ -1,17 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Three Little Birds | Data Viz</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Three Little Birds – Aviation Wildlife Strike Visualization</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
+  <!-- ───────────────────────────── HEADER ───────────────────────────── -->
+  <header>
+    <div class="header-inner">
+      <div class="bird-icon">🐦</div>
+      <div>
+        <h1>Three Little Birds</h1>
+        <p class="subtitle">Visualizing the Spatial–Temporal "Danger Zone" of Aviation Bird Strikes</p>
+      </div>
+    </div>
     <nav>
-        <a href="#home">Home</a>
-        <a href="#viz1">ThisCouldBeTheSecondTab</a>
-        <a href="#map">Third Tab</a>
+      <a href="#about">About</a>
+      <a href="#dataset">Dataset</a>
+      <a href="#eda">Analysis</a>
+      <a href="#visualizations">Visualizations</a>
+      <a href="#team">Team</a>
     </nav>
-    <main id="app">
-        </main>
+  </header>
+
+  <!-- ───────────────────────────── HERO ────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Where Birds Meet Planes</h2>
+      <p>
+        An interactive data visualization exploring the intersection of human air
+        travel and natural bird migration — revealing <em>where</em> and <em>when</em>
+        aircraft are most at risk of encountering wildlife.
+      </p>
+      <a href="#visualizations" class="btn">Explore Visualizations</a>
+    </div>
+  </section>
+
+  <!-- ───────────────────────────── ABOUT ───────────────────────────── -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2 class="section-title">About the Project</h2>
+      <div class="card-grid three-col">
+        <div class="card">
+          <span class="card-icon">✈️</span>
+          <h3>Safety</h3>
+          <p>Bird strikes pose real economic and safety threats to aviation, causing significant repair costs and operational disruptions every year.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🗺️</span>
+          <h3>Geospatial</h3>
+          <p>By overlaying strike incidents with migratory corridors we identify risk hotspots at specific airports, altitudes, and seasons.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">📊</span>
+          <h3>Interactive</h3>
+          <p>Our multi-dimensional visualization lets users explore several aspects of the dataset within a single, cohesive interface.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────────────── DATASET ─────────────────────────── -->
+  <section id="dataset" class="section alt-bg">
+    <div class="container">
+      <h2 class="section-title">Datasets</h2>
+      <div class="card-grid two-col">
+
+        <div class="card">
+          <h3>🦅 FAA Wildlife Strike Database</h3>
+          <p>
+            <strong>288 810</strong> incidents · <strong>110</strong> columns ·
+            FAA data from <strong>1990 – 2023</strong>
+          </p>
+          <p>
+            Covers species, aircraft type, flight phase, location, flight speed
+            and altitude, weather conditions, and economic damage — making it
+            one of the most comprehensive wildlife-strike records available.
+          </p>
+          <a class="link-tag"
+             href="https://www.kaggle.com/datasets/dianaddx/aircraft-wildlife-strikes-1990-2023"
+             target="_blank" rel="noopener">View on Kaggle →</a>
+        </div>
+
+        <div class="card">
+          <h3>🌍 Global Avian Migration Networks</h3>
+          <p>
+            <strong>42 844</strong> records · <strong>26</strong> columns ·
+            GPS telemetry from <strong>1993 – 2023</strong>
+          </p>
+          <p>
+            Provides directional migration routes with full taxonomic
+            classifications and IUCN conservation status, enabling direct
+            comparison with FAA incident locations.
+          </p>
+          <a class="link-tag"
+             href="https://figshare.com/articles/dataset/A_global_dataset_of_directional_migration_networks_of_migratory_birds/26162269"
+             target="_blank" rel="noopener">View on figshare →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────────────── EDA ─────────────────────────────── -->
+  <section id="eda" class="section">
+    <div class="container">
+      <h2 class="section-title">Exploratory Data Analysis</h2>
+      <p class="section-lead">
+        Key findings from our preliminary analysis of both datasets.
+        Full notebook available on
+        <a href="https://colab.research.google.com/drive/1rXPO2LDDgPRk97wf8cLNTDRRA6dTV_iW?usp=sharing"
+           target="_blank" rel="noopener">Google Colab</a>.
+      </p>
+
+      <div class="eda-grid">
+        <div class="eda-block">
+          <h3>Incidents per Month</h3>
+          <img src="data/images/IncidentPerMonth.png"
+               alt="Number of bird-strike incidents per calendar month"
+               loading="lazy" />
+          <p>A clear seasonal peak in summer months — coinciding with the main bird-migration windows.</p>
+        </div>
+
+        <div class="eda-block">
+          <h3>Incidents per Year</h3>
+          <img src="data/images/IncidentsPerYear.png"
+               alt="Annual trend of bird-strike incidents 1990–2023"
+               loading="lazy" />
+          <p>A steady upward trend in reported strikes over the 33-year period, reflecting both increased reporting and air traffic growth.</p>
+        </div>
+
+        <div class="eda-block">
+          <h3>Columns with Missing Data</h3>
+          <img src="data/images/ColumnsWithMissingData.png"
+               alt="Overview of columns with missing values in the FAA dataset"
+               loading="lazy" />
+          <p>Cost and fatality columns are largely empty; weather and coordinate fields have ~10 % gaps requiring targeted imputation.</p>
+        </div>
+
+        <div class="eda-block">
+          <h3>Migration Start Frequency by Month</h3>
+          <img src="data/images/FrequencyOfMigrationStartsByMonth.png"
+               alt="Frequency of migration starts per month across all species"
+               loading="lazy" />
+          <p>A bimodal pattern: the primary surge in late summer (July–September) and a secondary spring peak (March–April).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────── VISUALIZATIONS ───────────────────── -->
+  <section id="visualizations" class="section alt-bg">
+    <div class="container">
+      <h2 class="section-title">Planned Visualizations</h2>
+      <p class="section-lead">
+        Our final interactive dashboard will combine these three core components
+        into a single, cohesive interface.
+      </p>
+      <div class="card-grid three-col">
+
+        <div class="card coming-soon">
+          <span class="card-icon">🗺️</span>
+          <h3>Strike Hotspot Map</h3>
+          <p>
+            An interactive map overlaying FAA strike locations with global bird
+            migration corridors, highlighting geographic risk zones near airports.
+          </p>
+          <span class="badge">Coming – Milestone 3</span>
+        </div>
+
+        <div class="card coming-soon">
+          <span class="card-icon">📅</span>
+          <h3>Temporal Risk Analysis</h3>
+          <p>
+            Time-series and heatmap views revealing how strike frequency and
+            severity shift across months, years, flight phases, and altitude bands.
+          </p>
+          <span class="badge">Coming – Milestone 3</span>
+        </div>
+
+        <div class="card coming-soon">
+          <span class="card-icon">🛩️</span>
+          <h3>Aircraft Damage Profile</h3>
+          <p>
+            An annotated aircraft schematic showing which components are most
+            frequently struck and under what flight conditions damage occurs.
+          </p>
+          <span class="badge">Coming – Milestone 3</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────────────── TEAM ────────────────────────────── -->
+  <section id="team" class="section">
+    <div class="container">
+      <h2 class="section-title">The Team</h2>
+      <div class="card-grid three-col">
+        <div class="card team-card">
+          <div class="avatar">RJ</div>
+          <h3>Roxan Jaecklin</h3>
+          <p class="sciper">SCIPER 424398</p>
+        </div>
+        <div class="card team-card">
+          <div class="avatar">SW</div>
+          <h3>Samuel Waridel</h3>
+          <p class="sciper">SCIPER 330169</p>
+        </div>
+        <div class="card team-card">
+          <div class="avatar">MF</div>
+          <h3>Martin Fähnrich</h3>
+          <p class="sciper">SCIPER 423634</p>
+        </div>
+      </div>
+      <p class="course-note">
+        Data Visualization (COM-480) · EPFL · 2025
+      </p>
+    </div>
+  </section>
+
+  <!-- ───────────────────────────── FOOTER ──────────────────────────── -->
+  <footer>
+    <p>
+      Three Little Birds · COM-480 Data Visualization · EPFL ·
+      <a href="https://github.com/com-480-data-visualization/ThreeLittleBirds"
+         target="_blank" rel="noopener">GitHub Repository</a>
+    </p>
+  </footer>
+
+  <script src="main.js"></script>
 </body>
 </html>

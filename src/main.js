@@ -1,21 +1,57 @@
-import './styles/main.css';
-import * as d3 from 'd3'; // Just to test it's working
+/* =========================================================
+   Three Little Birds – main.js
+   Lightweight enhancements: active nav link highlighting
+   on scroll, lazy-image fade-in.
+   ========================================================= */
 
-const routes = {
-    '#home': '<h1>Welcome to our Project</h1><p>Select a visualization above.</p>',
-    '#viz1': '<h1>D3 Chart</h1><div id="chart"></div>',
-    '#map': '<h1>Interactive Map</h1><div id="map-container"></div>',
-};
+(function () {
+  'use strict';
 
-function router() {
-    const content = routes[window.location.hash] || routes['#home'];
-    document.getElementById('app').innerHTML = content;
+  /* ── Active nav link on scroll ────────────────────────── */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a');
 
-    if (window.location.hash === '#viz1') {
-        // You would call your D3 functions here
-        d3.select("#chart").append("p").text("D3 is loaded!");
-    }
-}
+  function updateActiveLink () {
+    const scrollY = window.scrollY + 100; // offset for sticky header
 
-window.addEventListener('hashchange', router);
-window.addEventListener('load', router);
+    let current = '';
+    sections.forEach(function (section) {
+      if (section.offsetTop <= scrollY) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(function (link) {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveLink, { passive: true });
+  updateActiveLink(); // run once on load
+
+  /* ── Intersection Observer: fade-in cards & EDA blocks ─ */
+  const fadeTargets = document.querySelectorAll('.card, .eda-block');
+
+  if ('IntersectionObserver' in window) {
+    fadeTargets.forEach(function (el) {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(18px)';
+      el.style.transition = 'opacity .45s ease, transform .45s ease';
+    });
+
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    fadeTargets.forEach(function (el) { observer.observe(el); });
+  }
+})();
