@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Three Little Birds – Aviation Wildlife Strike Visualization</title>
-  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
@@ -119,7 +118,7 @@
       <div class="eda-grid">
         <div class="eda-block">
           <h3>Incidents per Month</h3>
-          <img src="data/images/IncidentPerMonth.png"
+          <img src="/data/images/IncidentPerMonth.png"
                alt="Number of bird-strike incidents per calendar month"
                loading="lazy" />
           <p>A clear seasonal peak in summer months — coinciding with the main bird-migration windows.</p>
@@ -127,7 +126,7 @@
 
         <div class="eda-block">
           <h3>Incidents per Year</h3>
-          <img src="data/images/IncidentsPerYear.png"
+          <img src="/data/images/IncidentsPerYear.png"
                alt="Annual trend of bird-strike incidents 1990–2023"
                loading="lazy" />
           <p>A steady upward trend in reported strikes over the 33-year period, reflecting both increased reporting and air traffic growth.</p>
@@ -135,7 +134,7 @@
 
         <div class="eda-block">
           <h3>Columns with Missing Data</h3>
-          <img src="data/images/ColumnsWithMissingData.png"
+          <img src="/data/images/ColumnsWithMissingData.png"
                alt="Overview of columns with missing values in the FAA dataset"
                loading="lazy" />
           <p>Cost and fatality columns are largely empty; weather and coordinate fields have ~10 % gaps requiring targeted imputation.</p>
@@ -143,7 +142,7 @@
 
         <div class="eda-block">
           <h3>Migration Start Frequency by Month</h3>
-          <img src="data/images/FrequencyOfMigrationStartsByMonth.png"
+          <img src="/data/images/FrequencyOfMigrationStartsByMonth.png"
                alt="Frequency of migration starts per month across all species"
                loading="lazy" />
           <p>A bimodal pattern: the primary surge in late summer (July–September) and a secondary spring peak (March–April).</p>
@@ -191,7 +190,36 @@
           </p>
           <span class="badge">Coming – Milestone 3</span>
         </div>
+      </div>
+    </div>
 
+
+  </section>
+
+  <!-- ─────────────────────────────PLOT LAYOUT───────────────────────────── -->
+  <section id="plot-layout" class="section">
+    <div class="container">
+      <h2 class="section-title">Layout skeleton</h2>
+      <p class="section-lead">
+        We will use this layout skeleton to position our final visualizations, which will be rendered interactively using D3.js. Each placeholder will be replaced with a fully functional plot in the final version.
+      </p>
+      <div class="plot-layout">
+        <div class="map-plot">
+          <h3>🗺️ Strike Hotspot Map</h3>
+          <div id="primary-vis" class="map-plot"></div>
+        </div>
+        <div class="sliders-section">
+          <h3>🎚️ Interactive Sliders</h3>
+          <div id="sliders"></div>
+        </div>
+        <div class="plane-plot">
+          <h3>🛩️ Aircraft Damage Profile</h3>
+        </div>
+        <div class="time-series-plot">
+          <h3>📅 Temporal Risk Analysis</h3>
+          <div id="tertiary-vis"></div>
+        </div>
+        
       </div>
     </div>
   </section>
@@ -231,7 +259,5 @@
          target="_blank" rel="noopener">GitHub Repository</a>
     </p>
   </footer>
-
-  <script src="https://d3js.org/d3.v7.min.js"></script>
 </body>
 </html>
