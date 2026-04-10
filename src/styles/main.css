@@ -284,7 +284,7 @@ nav a:hover, nav a.active {
   border: 2px solid var(--plot-inner-border);
 }
 
-.plane-plot {
+.aircraft-plot {
   background: var(--card-bg);
   border-radius: var(--radius);
   padding: 1rem;

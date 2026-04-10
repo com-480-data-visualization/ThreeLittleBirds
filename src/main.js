@@ -4,6 +4,7 @@
    on scroll, lazy-image fade-in.
    ========================================================= */
 import './components/primary_vis.js';
+import './components/secondary_vis.js';
 import './components/tertiary_vis.js';
 import './components/sliders.js';
 import './styles/main.css';
