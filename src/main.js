@@ -29,6 +29,14 @@ import './styles/main.css';
         data: data
     });
 
+    createHeatmap({
+        containerId: "#Helicopter",
+        svgPath: "/data/images/helicopter.svg",
+        acClass: "B",
+        parts: ["STR_RAD", "STR_WINDSHLD", "STR_ENG1", "STR_ENG2", "STR_FUSE", "STR_WING_ROT", "STR_TAIL"],
+        data: data
+    });
+
     // repeat for other aircrafts
   });
 
