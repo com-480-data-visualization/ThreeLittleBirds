@@ -1,24 +1,25 @@
 export function initTabs() {
-    const tablinks = document.querySelectorAll(".tablinks");
+    const radioInputs = document.querySelectorAll('.radio-inputs input[type="radio"]');
+    const tabcontents = document.querySelectorAll(".tabcontent");
 
-    tablinks.forEach(button => {
-        button.addEventListener("click", (evt) => {
-            const aircraftName = evt.currentTarget.getAttribute("data-target");
-            
-            // Hide all tab content
-            const tabcontent = document.getElementsByClassName("tabcontent");
-            for (let i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
+    radioInputs.forEach(input => {
+        input.addEventListener("change", (evt) => {
+            const targetId = evt.target.getAttribute("data-target");
+
+            // 1. Hide all tab content
+            tabcontents.forEach(content => {
+                content.style.display = "none";
+            });
+
+            // 2. Show the content associated with the clicked radio
+            const selectedContent = document.getElementById(targetId);
+            if (selectedContent) {
+                selectedContent.style.display = "block";
+                
+                // Trigger a window resize event to ensure D3 charts 
+                // inside hidden tabs render correctly when shown
+                window.dispatchEvent(new Event('resize'));
             }
-
-            // Remove active class
-            for (let i = 0; i < tablinks.length; i++) {
-                tablinks[i].classList.remove("active");
-            }
-
-            // Show current tab and set active
-            document.getElementById(aircraftName).style.display = "block";
-            evt.currentTarget.classList.add("active");
         });
     });
 }

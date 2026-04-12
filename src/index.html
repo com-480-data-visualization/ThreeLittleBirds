@@ -34,7 +34,7 @@
         travel and natural bird migration — revealing <em>where</em> and <em>when</em>
         aircraft are most at risk of encountering wildlife.
       </p>
-      <a href="#visualizations" class="btn">Explore Visualizations</a>
+      <a href="#plot-layout" class="btn">Explore Visualizations</a>
     </div>
   </section>
 
@@ -210,32 +210,81 @@
         </div>
         <div class="sliders-section">
           <h3>🎚️ Interactive Sliders</h3>
-          <div id="sliders"></div>
+          <div id="sliders">
+            <p>The sliders do not have an effect on the visual yet.</p>
+          </div>
         </div>
         <div class="aircraft-tabs">
           <h3>🛩️ Aircraft Damage Profile</h3>
-          <div class="tab">
-            <button class="tablinks" data-target="Main Info">Main Info</button>
-            <button class="tablinks" data-target="Airplane">Airplane</button>
-            <button class="tablinks" data-target="Helicopter">Helicopter</button>
-            <button class="tablinks" data-target="Glider">Glider</button>
-            <button class="tablinks" data-target="Balloon">Balloon</button>
-            <button class="tablinks" data-target="Dirigible">Dirigible</button>
-            <button class="tablinks" data-target="Gyroplane">Gyroplane</button>
-            <button class="tablinks" data-target="Ultralight">Ultralight</button>
-            <button class="tablinks" data-target="Other">Other</button>
-            <button class="tablinks" data-target="Unknown">Unknown</button>
+          <div class="radio-inputs">
+            <label class="radio">
+              <input type="radio" name="aircraft-tab" data-target="General" checked>
+              <span class="name">General</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="aircraft-tab" data-target="Airplane">
+              <span class="name">Airplane</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="aircraft-tab" data-target="Helicopter">
+              <span class="name">Helicopter</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="aircraft-tab" data-target="Glider">
+              <span class="name">Glider</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="aircraft-tab" data-target="Balloon">
+              <span class="name">Balloon</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="aircraft-tab" data-target="Dirigible">
+              <span class="name">Dirigible</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="aircraft-tab" data-target="Gyroplane">
+              <span class="name">Gyroplane</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="aircraft-tab" data-target="Ultralight">
+              <span class="name">Ultralight</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="aircraft-tab" data-target="Other">
+              <span class="name">Other</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="aircraft-tab" data-target="Unknown">
+              <span class="name">Unknown</span>
+            </label>
+          </div>
+
+          <div id="General" class="tabcontent" style="display: block;">
+            <p>Currently there are only visuals for the airplane and the helicopter and only the airplane shows a correct heatmap.</p>
           </div>
           <div id="Airplane" class="tabcontent"></div>
-          <div id="Main Info" class="tabcontent"></div>
           <div id="Helicopter" class="tabcontent"></div>
-          <div id="Glider" class="tabcontent"></div>
-          <div id="Balloon" class="tabcontent"></div>
-          <div id="Dirigible" class="tabcontent"></div>
-          <div id="Gyroplane" class="tabcontent"></div>
-          <div id="Ultralight" class="tabcontent"></div>
-          <div id="Other" class="tabcontent"></div>
-          <div id="Unknown" class="tabcontent"></div>
+          <div id="Glider" class="tabcontent">
+            <p>Not yet implemented. Try Airplane instead.</p>
+          </div>
+          <div id="Balloon" class="tabcontent">
+            <p>Not yet implemented. Try Airplane instead.</p>
+          </div>
+          <div id="Dirigible" class="tabcontent">
+            <p>Not yet implemented. Try Airplane instead.</p>
+          </div>
+          <div id="Gyroplane" class="tabcontent">
+            <p>Not yet implemented. Try Airplane instead.</p>
+          </div>
+          <div id="Ultralight" class="tabcontent">
+            <p>Not yet implemented. Try Airplane instead.</p>
+          </div>
+          <div id="Other" class="tabcontent">
+            <p>Not yet implemented. Try Airplane instead.</p>
+          </div>
+          <div id="Unknown" class="tabcontent">
+            <p>Not yet implemented. Try Airplane instead.</p>
+          </div>
         </div>
         <div class="time-series-plot">
           <h3>📅 Temporal Risk Analysis</h3>

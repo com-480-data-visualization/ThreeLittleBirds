@@ -285,10 +285,16 @@ nav a:hover, nav a.active {
 }
 
 .aircraft-tabs {
-  background: var(--card-bg);
-  border-radius: var(--radius);
-  padding: 1rem;
-  border: 2px solid var(--plot-inner-border);
+  background: var(--card-bg, #fff);
+  border-radius: var(--radius, 8px);
+  padding: 1.5rem;
+  border: 2px solid var(--plot-inner-border, #eee);
+  margin-bottom: 2rem;
+}
+
+.aircraft-tabs h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
 
 .time-series-plot {
@@ -298,41 +304,62 @@ nav a:hover, nav a.active {
   border: 2px solid var(--plot-inner-border);
 }
 
-/* ── Aircraft Tabs ───────────────────────────────────────────────── */
+/* ── Modern Radio Tabs ────────────────────────────────────────── */
 
-.tab {
-  overflow: hidden;
-  border: 1px solid #ccc;
-  background-color: #f1f1f1;
+.radio-inputs {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap; /* Allows tabs to wrap on smaller screens */
+  border-radius: 0.5rem;
+  background-color: #EEE;
+  box-sizing: border-box;
+  box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
+  padding: 0.25rem;
+  width: 100%; /* Responsive width */
+  font-size: 14px;
+  margin-bottom: 1rem;
 }
 
-/* Style the buttons that are used to open the tab content */
-.tab button {
-  background-color: inherit;
-  float: left;
-  border: none;
-  outline: none;
+.radio-inputs .radio {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+.radio-inputs .radio input {
+  display: none;
+}
+
+.radio-inputs .radio .name {
+  display: flex;
   cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  border: none;
+  padding: .75rem 0.5rem;
+  color: rgba(51, 65, 85, 1);
+  transition: all .15s ease-in-out;
 }
 
-/* Change background color of buttons on hover */
-.tab button:hover {
-  background-color: #ddd;
+.radio-inputs .radio .name:hover {
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
-/* Create an active/current tablink class */
-.tab button.active {
-  background-color: #ccc;
+.radio-inputs .radio input:checked + .name {
+  background-color: #fff;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Style the tab content */
+/* ── Tab Content ──────────────────────────────────────────────── */
+
 .tabcontent {
   display: none;
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-top: none;
+  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 0.5rem;
+  background: #fff;
+  min-height: 400px;
 }
 
 
