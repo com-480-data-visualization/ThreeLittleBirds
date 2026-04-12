@@ -212,9 +212,33 @@
           <h3>🎚️ Interactive Sliders</h3>
           <div id="sliders"></div>
         </div>
-        <div class="aircraft-plot">
+        <div class="aircraft-tabs">
           <h3>🛩️ Aircraft Damage Profile</h3>
-          <div id="aircraft-damage"></div>
+
+          <div class="tab">
+            <button class="tablinks" onclick="openCity(event, 'Main Info')">Main Info</button>
+            <button class="tablinks" onclick="openCity(event, 'Airplane')">Airplane</button>
+            <button class="tablinks" onclick="openCity(event, 'Helicopter')">Helicopter</button>
+            <button class="tablinks" onclick="openCity(event, 'Glider')">Glider</button>
+            <button class="tablinks" onclick="openCity(event, 'Balloon')">Balloon</button>
+            <button class="tablinks" onclick="openCity(event, 'Dirigible')">Dirigible</button>
+            <button class="tablinks" onclick="openCity(event, 'Gyroplane')">Gyroplane</button>
+            <button class="tablinks" onclick="openCity(event, 'Ultralight')">Ultralight</button>
+            <button class="tablinks" onclick="openCity(event, 'Other')">Other</button>
+            <button class="tablinks" onclick="openCity(event, 'Unknown')">Unknown</button>
+          </div>
+
+          <div id="Airplane" class="tabcontent"></div>
+          <div id="Main Info" class="tabcontent"></div>
+          <div id="Helicopter" class="tabcontent"></div>
+          <div id="Glider" class="tabcontent"></div>
+          <div id="Balloon" class="tabcontent"></div>
+          <div id="Dirigible" class="tabcontent"></div>
+          <div id="Gyroplane" class="tabcontent"></div>
+          <div id="Ultralight" class="tabcontent"></div>
+          <div id="Other" class="tabcontent"></div>
+          <div id="Unknown" class="tabcontent"></div>
+
         </div>
         <div class="time-series-plot">
           <h3>📅 Temporal Risk Analysis</h3>

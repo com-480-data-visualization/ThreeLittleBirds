@@ -6,7 +6,7 @@ import * as d3 from 'd3';
     console.log("Starting Heatmap Script...");
 
     // 1. Select the container
-    const container = d3.select("#aircraft-damage");
+    const container = d3.select("#Airplane");
 
     // 2. Define the parts we want to track (IDs must match your .svg file)
     const airplaneParts = [
