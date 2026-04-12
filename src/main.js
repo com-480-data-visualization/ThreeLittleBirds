@@ -3,12 +3,42 @@
    Lightweight enhancements: active nav link highlighting
    on scroll, lazy-image fade-in.
    ========================================================= */
+import * as d3 from 'd3';
+import { initTabs } from './components/damageProfileTabs.js';
+import { createHeatmap } from './components/secondary_vis.js';
+import './components/primary_vis.js';
 import './components/tertiary_vis.js';
 import './components/sliders.js';
 import './styles/main.css';
 
 (function () {
   'use strict';
+  /* ── Initialize tabs in damage view ────────────────────────── */
+  initTabs();
+
+
+  /* ── Load data once for all visuals ────────────────────────── */
+  d3.csv("/data/STRIKE_REPORTS.csv").then(data => {
+
+    // Initialize Airplane Heatmap
+    createHeatmap({
+        containerId: "#Airplane",
+        svgPath: "/data/images/airplane.svg",
+        acClass: "A",
+        parts: ["STR_RAD", "STR_WINDSHLD", "STR_ENG1", "STR_ENG2", "STR_FUSE", "STR_WING_ROT", "STR_TAIL"],
+        data: data
+    });
+
+    createHeatmap({
+        containerId: "#Helicopter",
+        svgPath: "/data/images/helicopter.svg",
+        acClass: "B",
+        parts: ["STR_RAD", "STR_WINDSHLD", "STR_ENG1", "STR_ENG2", "STR_FUSE", "STR_WING_ROT", "STR_TAIL"],
+        data: data
+    });
+
+    // repeat for other aircrafts
+  });
 
   /* ── Active nav link on scroll ────────────────────────── */
   const sections = document.querySelectorAll('section[id]');

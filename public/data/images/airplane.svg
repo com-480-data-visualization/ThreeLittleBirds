@@ -1,0 +1,9 @@
+<svg id="airplane-blueprint" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <path id="STR_FUSE" d="M180,40 Q200,30 220,40 L220,240 Q200,250 180,240 Z" fill="#e0e0e0" stroke="#333"/>
+  <path id="STR_RAD" d="M180,40 Q200,10 220,40 Z" fill="#e0e0e0" stroke="#333"/>
+  <rect id="STR_WINDSHLD" x="185" y="45" width="30" height="10" fill="#e0e0e0" stroke="#333"/>
+  <path id="STR_WING_ROT" d="M180,100 L40,160 L40,180 L180,150 Z M220,100 L360,160 L360,180 L220,150 Z" fill="#e0e0e0" stroke="#333"/>
+  <rect id="STR_ENG1" x="100" y="145" width="20" height="30" fill="#e0e0e0" stroke="#333"/>
+  <rect id="STR_ENG2" x="280" y="145" width="20" height="30" fill="#e0e0e0" stroke="#333"/>
+  <path id="STR_TAIL" d="M180,220 L140,260 L140,270 L260,270 L260,260 L220,220 Z" fill="#e0e0e0" stroke="#333"/>
+</svg>
