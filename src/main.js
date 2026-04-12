@@ -3,7 +3,7 @@
    Lightweight enhancements: active nav link highlighting
    on scroll, lazy-image fade-in.
    ========================================================= */
-import { initTabs } from './components/openAircraft.js';
+import { initTabs } from './components/damageProfileTabs.js';
 import './components/primary_vis.js';
 import './components/secondary_vis.js';
 import './components/tertiary_vis.js';
