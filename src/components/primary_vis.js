@@ -32,7 +32,7 @@ import Stroke from 'ol/style/Stroke';
         })
     });
 
-    d3.csv('data/STRIKE_REPORTS.csv').then(data => {
+    d3.csv('data/STRIKE_REPORTS_CLEAN.csv').then(data => {
         const features = data.map(d => {
             return new Feature({
                 geometry: new Point(fromLonLat([+d.LONGITUDE, +d.LATITUDE]))

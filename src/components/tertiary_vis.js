@@ -26,7 +26,7 @@ import * as d3 from 'd3';
 
     const yAxisGroup = svg.append("g");
 
-    d3.csv("/data/STRIKE_REPORTS.csv").then(function (data) {
+    d3.csv("/data/STRIKE_REPORTS_CLEAN.csv").then(function (data) {
 
         data.forEach(d => {
             d.year = +d["INCIDENT_YEAR"];

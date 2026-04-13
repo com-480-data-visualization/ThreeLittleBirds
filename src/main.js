@@ -18,7 +18,7 @@ import './styles/main.css';
 
 
   /* ── Load data once for all visuals ────────────────────────── */
-  d3.csv("data/STRIKE_REPORTS.csv").then(data => {
+  d3.csv("data/STRIKE_REPORTS_CLEAN.csv").then(data => {
 
     // Initialize Airplane Heatmap
     createHeatmap({
