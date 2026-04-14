@@ -64,7 +64,7 @@ The 190 MB CSV contains 288,810 entries across 110 columns. Features include bin
 - Gaps: Cost and fatality columns are largely empty. Height, speed, and distance have significant missing values, requiring reliance on PHASE_OF_FLT for context. Weather and coordinates (~10%) also have gaps.
 - Cleaning Needed: Latitude values contain errors (max > 41M) and must be cleaned to the valid $\pm 90$ range.
 
-![alt text](https://github.com/com-480-data-visualization/ThreeLittleBirds/blob/master/data/images/ColumnsWithMissingData.png)
+![alt text](https://github.com/com-480-data-visualization/ThreeLittleBirds/blob/master/public/data/images/ColumnsWithMissingData.png)
 
 
 **Key Statistical Insights**
@@ -73,9 +73,9 @@ The 190 MB CSV contains 288,810 entries across 110 columns. Features include bin
 - Speed: The average strike occurs at 142 knots, though some occur at 0 knots (parked/taxiing).
 - Severity: Out-of-service time (AOS) averages 3 hours, but outliers reach 7+ years, indicating total destruction.
 
-![alt text](https://github.com/com-480-data-visualization/ThreeLittleBirds/blob/master/data/images/IncidentPerMonth.png)
+![alt text](https://github.com/com-480-data-visualization/ThreeLittleBirds/blob/master/public/data/images/IncidentPerMonth.png)
 
-![alt text](https://github.com/com-480-data-visualization/ThreeLittleBirds/blob/master/data/images/IncidentsPerYear.png)
+![alt text](https://github.com/com-480-data-visualization/ThreeLittleBirds/blob/master/public/data/images/IncidentsPerYear.png)
 
 **Notable Trends** 
 
@@ -96,7 +96,7 @@ The complementary dataset contains 42,844 entries across 26 columns. It tracks g
 - Timing: Migration is highly bimodal. The Autumn surge (July–September) is the largest movement window, followed by a secondary Spring peak (March–April).
 - Conservation: While 85.4% are "Least Concern," nearly 15% of tracked movements involve at-risk species (Vulnerable to Critically Endangered), providing vital data for protected transit nodes.
 
-![alt text](https://github.com/com-480-data-visualization/ThreeLittleBirds/blob/master/data/images/FrequencyOfMigrationStartsByMonth.png)
+![alt text](https://github.com/com-480-data-visualization/ThreeLittleBirds/blob/master/public/data/images/ColumnsWithMissingData.png)
 
 **Notable Trends**
 
@@ -117,6 +117,7 @@ For the complementary dataset we haven't found any usages as it doesn't have any
 
 **10% of the final grade**
 
+[Milestone 2 Document](https://docs.google.com/document/d/1uXNUvgiqn1qukKXd6VfytE65qpUvLgwY8Lny9tntYhM/edit?usp=sharing)
 
 ## Milestone 3 (29th May, 5pm)
 
