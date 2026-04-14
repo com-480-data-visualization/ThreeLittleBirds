@@ -38,6 +38,11 @@ import './styles/main.css';
       svgPath: "/data/images/balloon.svg",
       acClass: "D",
       parts: ["STR_FUSE", "STR_LG"]
+    },
+    "Gyroplane": {
+      svgPath: "/data/images/gyroplane.svg",
+      acClass: "F",
+      parts: ["STR_RAD", "STR_WINDSHLD", "STR_ENG1", "STR_ENG2", "STR_ENG3", "STR_ENG4", "STR_PROP", "STR_WING_ROT", "STR_FUSE", "STR_LG", "STR_TAIL", "STR_LGHTS"]
     }
     // repeat for other aircrafts
   };

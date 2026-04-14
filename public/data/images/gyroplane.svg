@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <g fill="#e6e6e6" stroke="#555555" stroke-width="1.5" stroke-linejoin="round">
+    
+    <g id="STR_RAD">
+      <path d="M 192 75 Q 200 68 208 75 L 200 85 Z" fill="#d0d0d0" />
+    </g>
+
+    <g id="STR_NOSE">
+      <path d="M 175 130 
+               C 175 80, 225 80, 225 130 
+               L 225 150 
+               L 175 150 Z" />
+    </g>
+
+    <g id="STR_WINDSHLD">
+      <path d="M 182 100 
+               C 182 85, 218 85, 218 100 
+               L 215 140 
+               L 185 140 Z" fill="#c4d4e0" />
+    </g>
+
+    <g id="STR_FUSE">
+      <path d="M 175 150 L 225 150 L 220 230 L 180 230 Z" />
+    </g>
+
+    <g id="STR_ENG1">
+      <rect x="185" y="215" width="30" height="20" rx="2" fill="#d0d0d0" />
+    </g>
+    <g id="STR_ENG2"></g>
+    <g id="STR_ENG3"></g>
+    <g id="STR_ENG4"></g>
+
+    <g id="STR_PROP">
+      <rect x="160" y="235" width="80" height="6" rx="3" fill="#555" />
+      <circle cx="200" cy="238" r="4" fill="#333" />
+    </g>
+
+    <g id="STR_WING_ROT">
+      <rect x="60" y="155" width="280" height="10" rx="5" fill="#f0f0f0" opacity="0.8" />
+      <circle cx="200" cy="160" r="8" fill="#555" />
+    </g>
+
+    <g id="STR_LG">
+      <line x1="160" y1="200" x2="240" y2="200" stroke-width="3" />
+      <rect x="150" y="190" width="10" height="20" rx="2" fill="#333" />
+      <rect x="240" y="190" width="10" height="20" rx="2" fill="#333" />
+      <rect x="196" y="85" width="8" height="15" rx="2" fill="#333" />
+    </g>
+
+    <g id="STR_TAIL">
+      <rect x="195" y="230" width="10" height="110" />
+      <path d="M 160 320 L 240 320 L 235 340 L 165 340 Z" />
+      <rect x="155" y="315" width="5" height="30" />
+      <rect x="240" y="315" width="5" height="30" />
+    </g>
+
+    <g id="STR_LGHTS">
+      <circle cx="155" cy="200" r="3" fill="#ff4444" stroke="#333" stroke-width="1" /> <circle cx="245" cy="200" r="3" fill="#44ff44" stroke="#333" stroke-width="1" /> <circle cx="200" cy="345" r="3" fill="#ffffff" stroke="#333" stroke-width="1" /> </g>
+
+  </g>
+</svg>
