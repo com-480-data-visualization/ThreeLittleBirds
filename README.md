@@ -121,6 +121,8 @@ Google Docs: [M2_Docs](https://docs.google.com/document/d/1uXNUvgiqn1qukKXd6Vfyt
 
 PDF: [M2_PDF](https://github.com/com-480-data-visualization/ThreeLittleBirds/blob/master/public/data/M2_ThreeLittleBirds.pdf)
 
+Functional Project Prototype: https://three-little-birds-nine.vercel.app
+
 ## Milestone 3 (29th May, 5pm)
 
 **80% of the final grade**
