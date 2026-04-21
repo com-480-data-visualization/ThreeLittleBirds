@@ -6,16 +6,20 @@
 import * as d3 from 'd3';
 import { initTabs } from './components/damageProfileTabs.js';
 import { createHeatmap } from './components/secondary_vis.js';
-import './components/primary_vis.js';
+import {createMap} from './components/map/createMap.js';
+import { createPointsLayer } from './components/map/layers.js';
 import './components/tertiary_vis.js';
 import './components/sliders.js';
 import './styles/main.css';
 
 (function () {
   'use strict';
+
+  /* ── Initialize map ────────────────────────── */
+  const map = createMap();
+
   /* ── Initialize tabs in damage view ────────────────────────── */
   initTabs();
-
 
   /* ── Load data once for all visuals ────────────────────────── */
   d3.csv("data/STRIKE_REPORTS_CLEAN.csv").then(data => {
