@@ -1,6 +1,13 @@
 import WebGLVectorLayer from 'ol/layer/WebGLVector.js';
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
+import Feature from 'ol/Feature.js';
+
+import CircleStyle from 'ol/style/Circle.js';
+import Fill from 'ol/style/Fill.js';
+import Stroke from 'ol/style/Stroke.js';
+import Style from 'ol/style/Style.js';
+import Text from 'ol/style/Text.js';
 
 export function createBaseLayer() {
   return new TileLayer({
@@ -10,35 +17,26 @@ export function createBaseLayer() {
 
 // update points layer, see https://openlayers.org/en/latest/examples/webgl-points-layer.html for reference
 
-const pointStyle = {
-  'circle-radius': 6,
-  'circle-fill-color': 'red',
-  'circle-stroke-color': 'white',
-  'circle-stroke-width': 2,
-};
+export function refreshPointsLayer(map, clusterSource) {
+  const existingLayer = map.getLayers()
+    .getArray()
+    .find(layer => layer.get('id') === 'pointsLayer');
 
-let pointsLayer = null;
+  if (existingLayer) {
+    existingLayer.setSource(clusterSource);
+    return;
+  }
 
-export function refreshPointsLayer(map, vectorSource, newStyle = pointStyle) {
-  let previousLayer = null;
-
-  map.getLayers().forEach(layer => {
-    if (layer.get('id') === 'pointsLayer') {
-      previousLayer = layer;
+  const pointsLayer = new WebGLVectorLayer({
+    source: clusterSource,
+    style: {
+      'circle-radius': ['interpolate', ['linear'], ['get', 'features'], 1, 6, 10, 12, 50, 20],
+      'circle-fill-color': 'rgba(255, 0, 0, 0.6)',
+      'circle-stroke-color': 'white',
+      'circle-stroke-width': 2,
     }
   });
 
-  pointsLayer = new WebGLVectorLayer({
-    source: vectorSource,
-    style: newStyle,
-  });
-
   pointsLayer.set('id', 'pointsLayer');
-
   map.addLayer(pointsLayer);
-
-  if (previousLayer) {
-    map.removeLayer(previousLayer);
-    previousLayer.dispose();
-  }
 }

@@ -2,9 +2,9 @@ import Map from 'ol/Map';
 import { fromLonLat } from "ol/proj";
 import View from 'ol/View';
 import { createBaseLayer, refreshPointsLayer } from './layers.js';
-import { loadCSV } from './dataLoader.js';
+import { clusterSource_from_data } from './dataLoader.js';
 
-export function createMap(targetId = "primary-vis", layers = [createBaseLayer()], viewConfig = { center: fromLonLat([8.54, 47.37]), zoom: 5 }) {
+export function createMap(data, targetId = "primary-vis", layers = [createBaseLayer()], viewConfig = { center: fromLonLat([8.54, 47.37]), zoom: 5 }) {
     const mapContainer = document.getElementById(targetId);
 
     if (!mapContainer) {
@@ -18,10 +18,10 @@ export function createMap(targetId = "primary-vis", layers = [createBaseLayer()]
         view: new View(viewConfig)
     });
 
-        // Load data and add points layer
+    // Load data and add points layer
     async function initializeDataLayer() {
-        const vectorSource = await loadCSV();
-        refreshPointsLayer(map, vectorSource);
+        const clusterSource = await clusterSource_from_data();
+        refreshPointsLayer(map, clusterSource);
     }
 
     initializeDataLayer();
