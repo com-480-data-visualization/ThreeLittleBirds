@@ -117,7 +117,11 @@ For the complementary dataset we haven't found any usages as it doesn't have any
 
 **10% of the final grade**
 
-[Milestone 2 Document](https://docs.google.com/document/d/1uXNUvgiqn1qukKXd6VfytE65qpUvLgwY8Lny9tntYhM/edit?usp=sharing)
+Google Docs: [M2_Docs](https://docs.google.com/document/d/1uXNUvgiqn1qukKXd6VfytE65qpUvLgwY8Lny9tntYhM/edit?usp=sharing)
+
+PDF: [M2_PDF](https://github.com/com-480-data-visualization/ThreeLittleBirds/blob/master/public/data/M2_ThreeLittleBirds.pdf)
+
+Functional Project Prototype: https://three-little-birds-nine.vercel.app
 
 ## Milestone 3 (29th May, 5pm)
 

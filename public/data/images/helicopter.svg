@@ -1,39 +1,81 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
   <g fill="#e6e6e6" stroke="#555555" stroke-width="1.5" stroke-linejoin="round">
     
-    <rect x="135" y="90" width="8" height="120" rx="4" />
-    <rect x="257" y="90" width="8" height="120" rx="4" />
-    <rect x="143" y="120" width="25" height="4" />
-    <rect x="143" y="170" width="25" height="4" />
-    <rect x="232" y="120" width="25" height="4" />
-    <rect x="232" y="170" width="25" height="4" />
+    <g id="STR_LG">
+      <rect x="135" y="90" width="8" height="120" rx="4" />
+      <rect x="257" y="90" width="8" height="120" rx="4" />
+      <rect x="143" y="120" width="25" height="4" />
+      <rect x="143" y="170" width="25" height="4" />
+      <rect x="232" y="120" width="25" height="4" />
+      <rect x="232" y="170" width="25" height="4" />
+    </g>
 
-    <polygon points="185,190 215,190 208,340 192,340" />
+    <g id="STR_TAIL">
+      <polygon points="185,190 215,190 208,340 192,340" />
+      <rect x="150" y="300" width="100" height="12" />
+    </g>
 
-    <rect x="150" y="300" width="100" height="12" />
+    <g id="STR_FUSE">
+      <path d="M 168 120 
+               L 232 120 
+               L 225 200 
+               L 175 200 
+               Z" />
+    </g>
 
-    <rect x="208" y="325" width="15" height="4" />
-    <rect x="223" y="305" width="4" height="44" rx="2" />
+    <g id="STR_NOSE">
+      <path d="M 168 120 
+               C 168 60, 232 60, 232 120 
+               Z" />
+    </g>
 
-    <path d="M 168 140
-             C 168 60, 232 60, 232 140
-             L 225 200
-             L 175 200
-             Z" />
+    <g id="STR_RAD">
+      <path d="M 183 78 
+               C 190 68, 210 68, 217 78 
+               Z" fill="#d0d0d0" />
+    </g>
 
-    <rect x="182" y="150" width="36" height="40" rx="4" />
+    <g id="STR_WINDSHLD">
+      <path d="M 178 110 
+               C 185 85, 215 85, 222 110 
+               L 218 125 
+               L 182 125 
+               Z" fill="#c4d4e0" />
+    </g>
 
-    <path d="M 178 110
-             C 185 85, 215 85, 222 110
-             L 218 125
-             L 182 125
-             Z" fill="#d0d0d0" />
-
-    <rect x="194" y="20" width="12" height="260" rx="4" />
-    <rect x="70" y="144" width="260" height="12" rx="4" />
-
-    <circle cx="200" cy="150" r="14" />
-    <circle cx="200" cy="150" r="6" />
+    <g id="STR_ENG1">
+      <rect x="180" y="145" width="16" height="35" rx="3" />
+    </g>
     
+    <g id="STR_ENG2">
+      <rect x="204" y="145" width="16" height="35" rx="3" />
+    </g>
+
+    <g id="STR_ENG3">
+      <rect x="192" y="182" width="16" height="10" rx="2" fill="#d0d0d0" />
+    </g>
+
+    <g id="STR_ENG4">
+      <rect x="190" y="135" width="20" height="8" rx="2" fill="#d0d0d0" />
+    </g>
+
+    <g id="STR_PROP">
+      <rect x="208" y="325" width="15" height="4" />
+      <rect x="223" y="305" width="4" height="44" rx="2" />
+    </g>
+
+    <g id="STR_WING_ROT">
+      <rect x="194" y="20" width="12" height="260" rx="4" fill="#f0f0f0" opacity="0.9" />
+      <rect x="70" y="144" width="260" height="12" rx="4" fill="#f0f0f0" opacity="0.9" />
+      <circle cx="200" cy="150" r="14" fill="#d0d0d0" />
+      <circle cx="200" cy="150" r="6" />
+    </g>
+
+    <g id="STR_LGHTS">
+      <circle cx="139" cy="94" r="3" fill="#ff4444" stroke="#333333" stroke-width="1" />
+      <circle cx="261" cy="94" r="3" fill="#44ff44" stroke="#333333" stroke-width="1" />
+      <circle cx="200" cy="342" r="3" fill="#ffffff" stroke="#333333" stroke-width="1" />
+    </g>
+
   </g>
 </svg>

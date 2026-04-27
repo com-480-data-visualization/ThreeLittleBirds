@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <g fill="#e6e6e6" stroke="#555555" stroke-width="1.5" stroke-linejoin="round">
+    
+    <g id="STR_RAD">
+      <ellipse cx="200" cy="105" rx="5" ry="8" fill="#d0d0d0" />
+    </g>
+
+    <g id="STR_NOSE">
+      <path d="M 190 140 
+               L 210 140 
+               L 205 100 
+               L 195 100 Z" />
+    </g>
+
+    <g id="STR_WINDSHLD">
+      <path d="M 192 115 Q 200 110 208 115 L 205 125 L 195 125 Z" fill="#c4d4e0" />
+    </g>
+
+    <g id="STR_FUSE">
+      <rect x="197" y="140" width="6" height="100" />
+      <rect x="188" y="145" width="24" height="35" rx="5" />
+    </g>
+
+    <g id="STR_WING_ROT">
+      <path d="M 50 160 
+               C 120 135, 280 135, 350 160 
+               L 340 185 
+               C 270 170, 130 170, 60 185 Z" />
+      <line x1="200" y1="150" x2="100" y2="165" stroke-width="0.8" />
+      <line x1="200" y1="150" x2="300" y2="165" stroke-width="0.8" />
+    </g>
+
+    <g id="STR_ENG1">
+      <rect x="188" y="185" width="24" height="20" rx="2" fill="#d0d0d0" />
+    </g>
+    <g id="STR_ENG2"></g>
+    <g id="STR_ENG3"></g>
+    <g id="STR_ENG4"></g>
+
+    <g id="STR_PROP">
+      <ellipse cx="200" cy="210" rx="45" ry="4" fill="#555" opacity="0.9" />
+      <circle cx="200" cy="210" r="3" fill="#333" />
+    </g>
+
+    <g id="STR_LG">
+      <line x1="160" y1="200" x2="240" y2="200" />
+      <rect x="154" y="192" width="6" height="16" rx="1" fill="#333" />
+      <rect x="240" y="192" width="6" height="16" rx="1" fill="#333" />
+      <rect x="197" y="90" width="6" height="12" rx="1" fill="#333" />
+    </g>
+
+    <g id="STR_TAIL">
+      <line x1="200" y1="210" x2="200" y2="330" stroke-width="2" />
+      <path d="M 175 330 L 225 330 L 220 350 L 180 350 Z" />
+      <rect x="198" y="320" width="4" height="35" rx="1" />
+    </g>
+
+    <g id="STR_LGHTS">
+      <circle cx="55" cy="165" r="2.5" fill="#ff4444" stroke="#333" stroke-width="0.5" /> <circle cx="345" cy="165" r="2.5" fill="#44ff44" stroke="#333" stroke-width="0.5" /> <circle cx="200" cy="355" r="2.5" fill="#ffffff" stroke="#333" stroke-width="0.5" /> </g>
+
+  </g>
+</svg>
