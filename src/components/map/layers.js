@@ -17,13 +17,20 @@ export function createBaseLayer() {
 
 // update points layer, see https://openlayers.org/en/latest/examples/webgl-points-layer.html for reference
 
+const POINTS_LAYER_ID = 'pointsLayer';
+
 export function refreshPointsLayer(map, clusterSource) {
-  const existingLayer = map.getLayers()
-    .getArray()
-    .find(layer => layer.get('id') === 'pointsLayer');
+  let existingLayer = null;
+
+  map.getLayers().forEach(layer => {
+    if (layer.get('id') === POINTS_LAYER_ID) {
+      existingLayer = layer;
+    }
+  });
 
   if (existingLayer) {
     existingLayer.setSource(clusterSource);
+    existingLayer.changed(); // ensures re-render if needed
     return;
   }
 
