@@ -18,6 +18,7 @@ export function createBaseLayer() {
 // update points layer, see https://openlayers.org/en/latest/examples/webgl-points-layer.html for reference
 
 const POINTS_LAYER_ID = 'pointsLayer';
+export const MIGRATION_LAYER_ID = 'migrationLayer';
 
 export function refreshPointsLayer(map, clusterSource) {
   let existingLayer = null;
@@ -34,16 +35,62 @@ export function refreshPointsLayer(map, clusterSource) {
     return;
   }
 
-  const pointsLayer = new WebGLVectorLayer({
-    source: clusterSource,
+  const pointsLayer = new WebGLVectorLayer({ // use WebGL for better performance with many points, but does not support writing text lables or hover interactions
+    source: clusterSource, // check out multi-scale rendering, or adding layer with labels that are only visible at certain zoom levels (zoom dependent styling)
     style: {
-      'circle-radius': ['interpolate', ['linear'], ['get', 'features'], 1, 6, 10, 12, 50, 20],
-      'circle-fill-color': 'rgba(255, 0, 0, 0.6)',
+      'circle-radius': ['interpolate', ['exponential', 1.75], ['get', 'size'], 1, 4,
+                                                                    10, 6, 
+                                                                    50, 9,
+                                                                    100, 12,
+                                                                    150, 14,
+                                                                    200, 16,
+                                                                    250, 17,
+                                                                    400, 20,
+                                                                    500, 23,
+                                                                    700, 26], // use exponential interpolation for better visual scaling, adjust breakpoints and sizes as needed
+      'circle-fill-color': ['interpolate', ['exponential', 1.75], ['get', 'size'], 1,   '#1f4e79',  // dark blue (very visible on light bg)
+  10,  '#2b83ba',
+  50,  '#4aa3c7',
+  100, '#3f7fbf',
+  150, '#6c63c7',  // shift into purple instead of yellow
+  200, '#8e44ad',
+  250, '#b23a48',
+  400, '#d64541',
+  500, '#e74c3c',
+  700, '#c0392b'], // add a color gradient based on size as well
       'circle-stroke-color': 'white',
-      'circle-stroke-width': 2,
+      'circle-stroke-width': 1
     }
   });
 
-  pointsLayer.set('id', 'pointsLayer');
+  pointsLayer.set('id', POINTS_LAYER_ID);
   map.addLayer(pointsLayer);
+}
+
+export function createMigrationLayer(map, vectorSource) {
+  let existingLayer = null;
+
+  map.getLayers().forEach(layer => {
+    if (layer.get('id') === MIGRATION_LAYER_ID) {
+      existingLayer = layer;
+    }
+  });
+
+  if (existingLayer) {
+    existingLayer.setSource(vectorSource);
+    existingLayer.changed(); // ensures re-render if needed
+    return;
+  }
+  const migrationLayer = new WebGLVectorLayer({
+    source: vectorSource,
+    style: {
+      'circle-radius': 5,
+      'circle-fill-color': 'rgb(255, 0, 191)', // semi-transparent red for migration points
+      'circle-stroke-color': 'white',
+      'circle-stroke-width': 1
+    }
+  });
+
+  migrationLayer.set('id', MIGRATION_LAYER_ID);
+  map.addLayer(migrationLayer);
 }
