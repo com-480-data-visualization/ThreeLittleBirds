@@ -2,7 +2,7 @@
    Three Little Birds – stylesheet
    ========================================================= */
 
-/* ── Reset & base ──────────────────────────────────────── */
+   /* ── Reset & base ──────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -261,8 +261,6 @@ nav a:hover, nav a.active {
   padding: 1rem;
   box-shadow: var(--shadow);  
 }
-
-@import "./../../node_modules/ol/ol.css";
 
 #primary-vis {
   width: 100%;
