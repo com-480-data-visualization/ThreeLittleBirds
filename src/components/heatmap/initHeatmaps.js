@@ -1,5 +1,5 @@
 import { createHeatmap } from "../secondary_vis";
-import { initTabs } from "../damageProfileTabs";
+import { initTabs } from "./initTabs";
 
 const heatmapConfigs = {
   "Airplane": {
