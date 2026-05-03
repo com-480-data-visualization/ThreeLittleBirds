@@ -8,14 +8,15 @@
 <body>
 
   <!-- ───────────────────────────── AUDIO ───────────────────────────── -->
-  <!-- audio remains hidden; loop attribute added -->
   <audio id="bg-music" src="/data/audio/DangerZoneOriginal.mp3" loop></audio>
 
-  <!-- fixed toggle button -->
-  <button id="music-toggle" class="music-btn" aria-label="Toggle Music">
-    <span class="icon-play">▶</span>
-    <span class="icon-pause" style="display:none;">Ⅱ</span>
-  </button>
+  <div class="music-container">
+    <label>
+      <input id="music-toggle" class="play-btn" type="checkbox">
+      <div class="play-icon"></div>
+      <div class="pause-icon"></div>
+    </label>
+  </div>
 
   <!-- ───────────────────────────── HEADER ───────────────────────────── -->
   <header>
