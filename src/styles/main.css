@@ -371,6 +371,46 @@ nav a:hover, nav a.active {
   display: block;
 }
 
+/* ── Data Loader ───────────────────────────────────────────────── */
+
+/* center the loaders inside their respective plot div */
+.vis-loader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+}
+
+/* ── airplane loader ────────── */
+.svg-calLoader {
+  width: 230px; 
+  height: 230px;
+  transform-origin: 115px 115px;
+  animation: 1.4s linear infinite loader-spin;
+}
+
+.cal-loader__plane { 
+  fill: var(--accent); 
+}
+
+.cal-loader__path { 
+  stroke: var(--muted); 
+  animation: 1.4s ease-in-out infinite loader-path; 
+}
+
+@keyframes loader-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes loader-path {
+  0%   { stroke-dasharray: 0, 580, 0, 0, 0, 0, 0, 0, 0; }
+  50%  { stroke-dasharray: 0, 450, 10, 30, 10, 30, 10, 30, 10; }
+  100% { stroke-dasharray: 0, 580, 0, 0, 0, 0, 0, 0, 0; }
+}
+
 
 /* ── Team ───────────────────────────────────────────────── */
 .team-card { text-align: center; }
