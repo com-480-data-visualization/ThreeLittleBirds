@@ -86,6 +86,7 @@ export function createHeatmap(config) {
                 });
         });
 
+        // TODO: Move Legend to bottom left corner
         // create a unique gradient legend for each aircraft tab
         const gradientId = `gradient-${acClass}`;
         const defs = svg.append("defs");

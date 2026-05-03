@@ -43,6 +43,26 @@ export async function init_visualizations() {
       layer.setVisible(e.target.checked);
     }
   });
+
+  const music = document.getElementById('bg-music');
+  const btn = document.getElementById('music-toggle');
+  const playIcon = btn.querySelector('.icon-play');
+  const pauseIcon = btn.querySelector('.icon-pause');
+
+  btn.addEventListener('click', () => {
+  if (music.paused) {
+    music.play();
+    playIcon.style.display = 'none';
+    pauseIcon.style.display = 'inline';
+    btn.classList.add('playing');
+  } else {
+    music.pause();
+    playIcon.style.display = 'inline';
+    pauseIcon.style.display = 'none';
+    btn.classList.remove('playing');
+  }
+});
+
 }
 
 export function update_visualizations(filterFn) {
