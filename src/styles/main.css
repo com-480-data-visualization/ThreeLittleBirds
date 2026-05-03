@@ -60,24 +60,6 @@ header {
   color: #fff;
 }
 
-.header-inner audio {
-  height: 32px;
-  width: 280px;
-  filter: drop-shadow(var(--shadow)) invert(10%) hue-rotate(180deg) brightness(1.2);
-  /* target audio element for modern browser consistency */
-}
-
-@media (max-width: 768px) {
-  .header-inner {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .header-inner figure {
-    align-items: center;
-  }
-}
-
 .bird-icon { font-size: 2.4rem; line-height: 1; }
 
 header h1 { font-size: 1.55rem; font-weight: 700; }
@@ -90,9 +72,11 @@ header h1 { font-size: 1.55rem; font-weight: 700; }
 
 nav {
   display: flex;
+  justify-content: center;
   gap: 0;
   max-width: 1100px;
   margin: .8rem auto 0;
+  width: 100%;
 }
 
 nav a {
