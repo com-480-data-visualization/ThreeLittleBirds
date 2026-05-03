@@ -149,7 +149,6 @@ nav a:hover, nav a.active {
 .section-lead {
   font-size: 1.05rem;
   color: var(--muted);
-  max-width: 680px;
   margin-bottom: 2.5rem;
 }
 
