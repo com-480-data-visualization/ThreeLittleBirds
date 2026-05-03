@@ -27,7 +27,7 @@ body {
   background: var(--bg);
   color: var(--text);
   line-height: 1.65;
-  font-size: 16px;
+  font-size: 16 px;
 }
 
 a { color: var(--primary); text-decoration: none; }
@@ -46,12 +46,18 @@ header {
   box-shadow: 0 2px 8px rgba(0,0,0,.25);
 }
 
-.header-inner {
+.header-inner figure {
+  margin-top: 0.8rem;
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  max-width: 1100px;
-  margin: 0 auto;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.header-inner figcaption {
+  font-size: 0.75rem;
+  font-style: italic;
+  opacity: 0.8;
+  color: #fff;
 }
 
 .bird-icon { font-size: 2.4rem; line-height: 1; }
@@ -66,9 +72,11 @@ header h1 { font-size: 1.55rem; font-weight: 700; }
 
 nav {
   display: flex;
+  justify-content: center;
   gap: 0;
   max-width: 1100px;
   margin: .8rem auto 0;
+  width: 100%;
 }
 
 nav a {
@@ -125,7 +133,7 @@ nav a:hover, nav a.active {
 .alt-bg  { background: var(--bg-alt); }
 
 .container {
-  max-width: 1100px;
+  max-width: 1600px;
   margin: 0 auto;
 }
 
@@ -149,7 +157,6 @@ nav a:hover, nav a.active {
 .section-lead {
   font-size: 1.05rem;
   color: var(--muted);
-  max-width: 680px;
   margin-bottom: 2.5rem;
 }
 
@@ -235,27 +242,17 @@ nav a:hover, nav a.active {
   color: var(--muted);
 }
 
-/* ── Coming-soon cards ──────────────────────────────────── */
-.coming-soon { border: 2px dashed #c8d8e8; }
-
-.badge {
-  display: inline-block;
-  margin-top: 1rem;
-  background: var(--bg-alt);
-  color: var(--muted);
-  font-size: .78rem;
-  font-weight: 700;
-  padding: .25rem .75rem;
-  border-radius: 50px;
-  letter-spacing: .03em;
-  text-transform: uppercase;
-}
-
 /* ── Plot layout ──────────────────────────────────── */
 .plot-layout {
   display: grid;
   gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
+  /* 2fr for the left column (approx 66%), 1fr for right (approx 33%) */
+  grid-template-columns: 2fr 1fr;
+  /* Define the layout grid visually */
+  grid-template-areas:
+    "map    map"
+    "heat   slider"
+    "bar    slider";
   background: var(--card-bg);
   border-radius: var(--radius);
   padding: 1rem;
@@ -264,11 +261,12 @@ nav a:hover, nav a.active {
 
 #primary-vis {
   width: 100%;
-  height: 400px; /* or whatever size you want */
+  height: 800px; 
   box-sizing: border-box;
 }
 
 .map-plot {
+  grid-area: map;
   background: var(--card-bg);
   border-radius: var(--radius);
   padding: 1rem;
@@ -276,6 +274,7 @@ nav a:hover, nav a.active {
 }
 
 .sliders-section {
+  grid-area: slider;
   background: var(--card-bg);
   border-radius: var(--radius);
   padding: 1rem;
@@ -283,19 +282,18 @@ nav a:hover, nav a.active {
 }
 
 .aircraft-tabs {
+  grid-area: heat;
   background: var(--card-bg, #fff);
   border-radius: var(--radius, 8px);
+  height: 800px;
   padding: 1.5rem;
   border: 2px solid var(--plot-inner-border, #eee);
-  margin-bottom: 2rem;
-}
-
-.aircraft-tabs h3 {
-  margin-top: 0;
-  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .time-series-plot {
+  grid-area: bar;
   background: var(--card-bg);
   border-radius: var(--radius);
   padding: 1rem;
@@ -352,12 +350,65 @@ nav a:hover, nav a.active {
 /* ── Tab Content ──────────────────────────────────────────────── */
 
 .tabcontent {
-  display: none;
-  padding: 20px;
-  border: 1px solid #eee;
-  border-radius: 0.5rem;
-  background: #fff;
-  min-height: 400px;
+  display: none; 
+  flex-grow: 1;
+  overflow: hidden;
+  position: relative;
+  padding: 10px;
+}
+
+.tabcontent[style*="display: block"] {
+  display: flex !important; 
+  align-items: center;
+  justify-content: center;
+}
+
+.tabcontent svg {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  display: block;
+}
+
+/* ── Data Loader ───────────────────────────────────────────────── */
+
+/* center the loaders inside their respective plot div */
+.vis-loader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+}
+
+/* ── airplane loader ────────── */
+.svg-calLoader {
+  width: 230px; 
+  height: 230px;
+  transform-origin: 115px 115px;
+  animation: 1.4s linear infinite loader-spin;
+}
+
+.cal-loader__plane { 
+  fill: var(--accent); 
+}
+
+.cal-loader__path { 
+  stroke: var(--muted); 
+  animation: 1.4s ease-in-out infinite loader-path; 
+}
+
+@keyframes loader-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes loader-path {
+  0%   { stroke-dasharray: 0, 580, 0, 0, 0, 0, 0, 0, 0; }
+  50%  { stroke-dasharray: 0, 450, 10, 30, 10, 30, 10, 30, 10; }
+  100% { stroke-dasharray: 0, 580, 0, 0, 0, 0, 0, 0, 0; }
 }
 
 
@@ -399,8 +450,123 @@ footer {
 footer a { color: rgba(255,255,255,.9); }
 
 /* ── Responsive tweaks ──────────────────────────────────── */
-@media (max-width: 640px) {
-  .hero h2   { font-size: 1.7rem; }
-  .eda-grid  { grid-template-columns: 1fr; }
-  nav a      { padding: .5rem .65rem; font-size: .82rem; }
+@media (max-width: 900px) {
+  /* Stack everything into a single column on smaller screens */
+  .plot-layout {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "map"
+      "heat"
+      "bar"
+      "slider";
+  }
+}
+
+/* ── Music Button ──────────────────────────────────── */
+.music-container {
+  width: 60px; 
+  height: 60px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  transition: transform var(--transition);
+}
+
+.music-container:hover {
+  transform: scale(1.1);
+}
+
+.play-btn {
+  position: absolute;
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(var(--accent), var(--accent)); 
+  cursor: pointer;
+  outline: none;
+  margin: 0; 
+  box-shadow: var(--shadow); 
+}
+
+.play-btn::before {
+  content: "";
+  position: absolute;
+  width: 90%; 
+  height: 90%;
+  background-color: var(--bg);
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.play-icon {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 58%;
+  top: 50%;
+  background-color: var(--accent); 
+  transform: translate(-50%, -50%) rotate(90deg);
+  clip-path: polygon(50% 15%, 0% 100%, 100% 100%);
+  transition: all 400ms ease-in-out;
+  pointer-events: none; 
+}
+
+.pause-icon {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.play-btn:checked {
+  animation: borderAnimate 700ms ease-in-out 1 forwards;
+}
+
+@keyframes borderAnimate {
+  0% { 
+    transform: rotate(0); 
+    background: conic-gradient(var(--accent), transparent 20%); 
+  }
+  80% { 
+    background: conic-gradient(var(--accent), transparent 90%); 
+  }
+  100% { 
+    transform: rotate(360deg); 
+    background: conic-gradient(var(--accent), var(--accent)); 
+  }
+}
+
+.play-btn:checked + .play-icon {
+  clip-path: polygon(0 100%, 0% 100%, 100% 100%);
+}
+
+.pause-icon::before, .pause-icon::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 100%;
+  background-color: var(--accent);
+}
+
+.pause-icon::before { left: 0; }
+.pause-icon::after { right: 0; }
+
+.play-btn:checked ~ .pause-icon::before {
+  animation: reveal 300ms ease-in-out 350ms 1 forwards;
+}
+
+.play-btn:checked ~ .pause-icon::after {
+  animation: reveal 300ms ease-in-out 600ms 1 forwards;
+}
+
+@keyframes reveal {
+  0% { width: 0; }
+  100% { width: 35%; }
 }

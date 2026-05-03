@@ -4,7 +4,6 @@ import os
 input_file = 'public/data/STRIKE_REPORTS.csv'
 output_file = 'public/data/STRIKE_REPORTS_CLEAN.csv'
 
-# Using a set for O(1) lookup time
 columns_to_drop = {
     "AIRPORT", "RUNWAY", "STATE", "FAAREGION", "LOCATION", "ENROUTE_STATE", 
     "OPID", "OPERATOR", "REG", "FLT", "AIRCRAFT", "AMA", "AMO", "EMA", "EMO", 
