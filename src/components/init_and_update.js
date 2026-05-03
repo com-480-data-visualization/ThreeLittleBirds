@@ -18,7 +18,7 @@ export async function init_visualizations() {
   await new Promise(requestAnimationFrame); // ensure this runs after the initial render, so we don't block the UI with data loading and processing
 
   state.data = await d3.csv('data/STRIKE_REPORTS_CLEAN.csv');
-  state.migration_data = await d3.csv('data/Bird_migration_dataset_renamed.csv');
+  state.migration_data = await d3.csv('data/Bird_migration_dataset_renamed_CLEAN.csv');
 
   const map_worker = new Worker(
     new URL('./workers/map_worker.js', import.meta.url),
