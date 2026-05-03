@@ -12,17 +12,32 @@ export function createHeatmap(config) {
     const { containerId, svgPath, acClass, parts, data } = config;
     const container = d3.select(containerId);
     
-    // clear existing content to prevent duplicates if re-rendered
+    // clear existing content to prevent rendering duplicates
     container.selectAll("*").remove();
+
+    // setup dynamic tooltip element appended directly to the body
+    let tooltip = d3.select("body").select(".heatmap-tooltip");
+    if (tooltip.empty()) {
+        tooltip = d3.select("body").append("div")
+            .attr("class", "heatmap-tooltip")
+            .style("position", "absolute")
+            .style("visibility", "hidden")
+            .style("background-color", "rgba(255, 255, 255, 0.95)")
+            .style("border", "1px solid #ccc")
+            .style("padding", "10px")
+            .style("border-radius", "4px")
+            .style("pointer-events", "none")
+            .style("font-size", "12px")
+            .style("box-shadow", "0 2px 4px rgba(0,0,0,0.2)")
+            .style("z-index", "1000");
+    }
 
     // load the specific svg for this tab
     d3.xml(svgPath).then(xml => {
         const importedNode = document.importNode(xml.documentElement, true);
-        
-        // select the svg node and manipulate attributes for scaling
         const svg = d3.select(importedNode);
         
-        // get existing dimensions to create a viewbox if one does not exist
+        // get existing dimensions to create a viewbox
         const originalWidth = svg.attr("width") || 800;
         const originalHeight = svg.attr("height") || 800;
 
@@ -30,7 +45,7 @@ export function createHeatmap(config) {
             svg.attr("viewBox", `0 0 ${originalWidth} ${originalHeight}`);
         }
 
-        // remove fixed width and height to allow css max-height: 100% to work
+        // remove fixed width and height to allow responsive scaling
         svg.attr("width", null)
            .attr("height", null)
            .attr("preserveAspectRatio", "xMidYMid meet")
@@ -48,46 +63,80 @@ export function createHeatmap(config) {
 
         wrapper.node().appendChild(importedNode);
 
-        // process data by filtering by aircraft class
+        // filter the core dataset by aircraft class
         const filteredData = data.filter(d => d.AC_CLASS === acClass);
 
-        let strikeCounts = {};
+        // aggregate comprehensive numerical data for each damage zone
+        const partStats = {};
+        
+        // iterate over parts to calculate all required tooltip stats
         parts.forEach(part => {
-            strikeCounts[part] = d3.sum(filteredData, d => {
+            // isolate the subset of records where this specific part was struck
+            const partData = filteredData.filter(d => {
                 const val = String(d[part]).trim().toUpperCase();
-                return (val === "TRUE" || val === "1") ? 1 : 0;
+                return (val === "TRUE" || val === "1");
             });
+            
+            // extract additional variables into a consolidated object
+            partStats[part] = {
+                strikes: partData.length,
+                // aggregate custom numerical columns from the dataset
+                avgCost: partData.length ? d3.mean(partData, d => Number(d.COST_REPAIRS) || 0) : 0,
+                injuries: d3.sum(partData, d => Number(d.NR_INJURIES) || 0)
+            };
         });
 
-        const maxStrikes = d3.max(Object.values(strikeCounts)) || 1;
+        // calculate max strikes dynamically for the color domain
+        const maxStrikes = d3.max(Object.values(partStats), d => d.strikes) || 1;
         const colorScale = d3.scaleSequential()
             .domain([0, maxStrikes])
             .interpolator(d3.interpolateYlOrRd);
 
-        // apply colors and hover interactions to the svg parts
+        // apply colors and bind positional hover interactions to the svg parts
         parts.forEach(part => {
-            const count = strikeCounts[part];
+            const stats = partStats[part];
             const partElement = svg.select(`#${part}`);
 
             if (partElement.empty()) return;
             
             partElement.transition()
                 .duration(1000)
-                .style("fill", count > 0 ? colorScale(count) : "#e0e0e0")
+                .style("fill", stats.strikes > 0 ? colorScale(stats.strikes) : "#e0e0e0")
                 .style("stroke", "#333")
                 .style("stroke-width", "1px");
 
+            // attach interaction events directly within the local lexical scope
             partElement.attr("cursor", "pointer")
-                .on("mouseover", function() {
+                .on("mouseover", function(event) {
+                    // highlight the outline of the active damage zone
                     d3.select(this).style("stroke-width", "3px");
+                    
+                    // inject the dynamic data block into the tooltip html
+                    tooltip.html(`
+                        <strong>Damage Zone: ${part}</strong><br/>
+                        Total Strikes: ${stats.strikes}<br/>
+                        Avg Repair Cost: $${stats.avgCost.toFixed(2)}<br/>
+                        Total Injuries: ${stats.injuries}
+                    `);
+                    
+                    // reveal the tooltip element
+                    tooltip.style("visibility", "visible");
+                })
+                .on("mousemove", function(event) {
+                    // anchor the tooltip coordinates relative to the cursor position
+                    tooltip.style("top", (event.pageY + 15) + "px")
+                           .style("left", (event.pageX + 15) + "px");
                 })
                 .on("mouseout", function() {
+                    // revert the stroke width to default
                     d3.select(this).style("stroke-width", "1px");
+                    
+                    // hide the tooltip visually
+                    tooltip.style("visibility", "hidden");
                 });
         });
 
-        // TODO: Move Legend to bottom left corner
-        // create a unique gradient legend for each aircraft tab
+        // create a unique gradient legend for the tab
         const gradientId = `gradient-${acClass}`;
         const defs = svg.append("defs");
         const linearGradient = defs.append("linearGradient").attr("id", gradientId);
