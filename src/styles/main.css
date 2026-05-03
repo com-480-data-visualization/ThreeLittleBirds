@@ -255,7 +255,13 @@ nav a:hover, nav a.active {
 .plot-layout {
   display: grid;
   gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
+  /* 2fr for the left column (approx 66%), 1fr for right (approx 33%) */
+  grid-template-columns: 2fr 1fr;
+  /* Define the layout grid visually */
+  grid-template-areas:
+    "map    map"
+    "heat   slider"
+    "bar    slider";
   background: var(--card-bg);
   border-radius: var(--radius);
   padding: 1rem;
@@ -264,11 +270,12 @@ nav a:hover, nav a.active {
 
 #primary-vis {
   width: 100%;
-  height: 400px; /* or whatever size you want */
+  height: 400px; 
   box-sizing: border-box;
 }
 
 .map-plot {
+  grid-area: map;
   background: var(--card-bg);
   border-radius: var(--radius);
   padding: 1rem;
@@ -276,6 +283,7 @@ nav a:hover, nav a.active {
 }
 
 .sliders-section {
+  grid-area: slider;
   background: var(--card-bg);
   border-radius: var(--radius);
   padding: 1rem;
@@ -283,11 +291,12 @@ nav a:hover, nav a.active {
 }
 
 .aircraft-tabs {
+  grid-area: heat;
   background: var(--card-bg, #fff);
   border-radius: var(--radius, 8px);
   padding: 1.5rem;
   border: 2px solid var(--plot-inner-border, #eee);
-  margin-bottom: 2rem;
+  /* margin-bottom removed so grid gap controls spacing */
 }
 
 .aircraft-tabs h3 {
@@ -296,6 +305,7 @@ nav a:hover, nav a.active {
 }
 
 .time-series-plot {
+  grid-area: bar;
   background: var(--card-bg);
   border-radius: var(--radius);
   padding: 1rem;
@@ -399,8 +409,14 @@ footer {
 footer a { color: rgba(255,255,255,.9); }
 
 /* ── Responsive tweaks ──────────────────────────────────── */
-@media (max-width: 640px) {
-  .hero h2   { font-size: 1.7rem; }
-  .eda-grid  { grid-template-columns: 1fr; }
-  nav a      { padding: .5rem .65rem; font-size: .82rem; }
+@media (max-width: 900px) {
+  /* Stack everything into a single column on smaller screens */
+  .plot-layout {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "map"
+      "heat"
+      "bar"
+      "slider";
+  }
 }
