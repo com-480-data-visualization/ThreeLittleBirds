@@ -19,7 +19,7 @@ export async function init_visualizations() {
 
   // fetch data concurrently to reduce loading times
   [state.data, state.migration_data] = await Promise.all([
-    d3.csv('data/STRIKE_REPORTS_CLEAN.csv'),
+    d3.csv('data/STRIKE_REPORTS.csv'),
     d3.csv('data/Bird_migration_dataset_renamed_CLEAN.csv')
   ]);
 
