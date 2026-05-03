@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 
 import { init_map } from './map/initMap.js';
-import { init_heatmaps } from './damage/initHeatmaps.js';
+import { init_heatmaps } from './heatmap/initHeatmaps.js';
 import { init_barplots } from './barplot/initBarplot.js';
 import { MIGRATION_LAYER_ID } from './map/layers.js';
 
