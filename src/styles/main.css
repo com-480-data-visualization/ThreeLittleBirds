@@ -27,7 +27,7 @@ body {
   background: var(--bg);
   color: var(--text);
   line-height: 1.65;
-  font-size: 16px;
+  font-size: 16 px;
 }
 
 a { color: var(--primary); text-decoration: none; }
@@ -125,7 +125,7 @@ nav a:hover, nav a.active {
 .alt-bg  { background: var(--bg-alt); }
 
 .container {
-  max-width: 1100px;
+  max-width: 1600px;
   margin: 0 auto;
 }
 
@@ -253,7 +253,7 @@ nav a:hover, nav a.active {
 
 #primary-vis {
   width: 100%;
-  height: 400px; 
+  height: 800px; 
   box-sizing: border-box;
 }
 
@@ -277,14 +277,11 @@ nav a:hover, nav a.active {
   grid-area: heat;
   background: var(--card-bg, #fff);
   border-radius: var(--radius, 8px);
+  height: 800px;
   padding: 1.5rem;
   border: 2px solid var(--plot-inner-border, #eee);
-  /* margin-bottom removed so grid gap controls spacing */
-}
-
-.aircraft-tabs h3 {
-  margin-top: 0;
-  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .time-series-plot {
@@ -345,12 +342,25 @@ nav a:hover, nav a.active {
 /* ── Tab Content ──────────────────────────────────────────────── */
 
 .tabcontent {
-  display: none;
-  padding: 20px;
-  border: 1px solid #eee;
-  border-radius: 0.5rem;
-  background: #fff;
-  min-height: 400px;
+  display: none; 
+  flex-grow: 1;
+  overflow: hidden;
+  position: relative;
+  padding: 10px;
+}
+
+.tabcontent[style*="display: block"] {
+  display: flex !important; 
+  align-items: center;
+  justify-content: center;
+}
+
+.tabcontent svg {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  display: block;
 }
 
 

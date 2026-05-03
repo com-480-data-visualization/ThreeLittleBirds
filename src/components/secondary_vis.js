@@ -12,21 +12,43 @@ export function createHeatmap(config) {
     const { containerId, svgPath, acClass, parts, data } = config;
     const container = d3.select(containerId);
     
-    // Clear existing content to prevent duplicates if re-rendered
+    // clear existing content to prevent duplicates if re-rendered
     container.selectAll("*").remove();
 
-    // Load the specific SVG for this tab
+    // load the specific svg for this tab
     d3.xml(svgPath).then(xml => {
         const importedNode = document.importNode(xml.documentElement, true);
         
-        // Wrap SVG in a div
-        const wrapper = container.append("div").attr("class", "blueprint-wrapper");
+        // select the svg node and manipulate attributes for scaling
+        const svg = d3.select(importedNode);
+        
+        // get existing dimensions to create a viewbox if one does not exist
+        const originalWidth = svg.attr("width") || 800;
+        const originalHeight = svg.attr("height") || 800;
+
+        if (!svg.attr("viewBox")) {
+            svg.attr("viewBox", `0 0 ${originalWidth} ${originalHeight}`);
+        }
+
+        // remove fixed width and height to allow css max-height: 100% to work
+        svg.attr("width", null)
+           .attr("height", null)
+           .attr("preserveAspectRatio", "xMidYMid meet")
+           .style("width", "100%")
+           .style("height", "100%");
+
+        // append to container and set flexbox styles to center the blueprint
+        const wrapper = container.append("div")
+            .attr("class", "blueprint-wrapper")
+            .style("height", "100%")
+            .style("width", "100%")
+            .style("display", "flex")
+            .style("justify-content", "center")
+            .style("align-items", "center");
+
         wrapper.node().appendChild(importedNode);
 
-        // Select the SVG (Assuming the <svg> inside the file has a class or we select the first one)
-        const svg = wrapper.select("svg");
-
-        // --- DATA PROCESSING ---
+        // process data by filtering by aircraft class
         const filteredData = data.filter(d => d.AC_CLASS === acClass);
 
         let strikeCounts = {};
@@ -42,7 +64,7 @@ export function createHeatmap(config) {
             .domain([0, maxStrikes])
             .interpolator(d3.interpolateYlOrRd);
 
-        // --- APPLY COLORS ---
+        // apply colors and hover interactions to the svg parts
         parts.forEach(part => {
             const count = strikeCounts[part];
             const partElement = svg.select(`#${part}`);
@@ -64,8 +86,8 @@ export function createHeatmap(config) {
                 });
         });
 
-        // --- LEGEND (Unique per tab) ---
-        const gradientId = `gradient-${acClass}`; // Unique ID per aircraft class
+        // create a unique gradient legend for each aircraft tab
+        const gradientId = `gradient-${acClass}`;
         const defs = svg.append("defs");
         const linearGradient = defs.append("linearGradient").attr("id", gradientId);
 
@@ -90,6 +112,5 @@ export function createHeatmap(config) {
             .text(`${maxStrikes.toLocaleString()} Strikes`);
 
         legendGroup.append("text").attr("y", -10).style("font-weight", "bold").text("Strike Intensity");
-
     });
 }
