@@ -1,4 +1,5 @@
 import WebGLVectorLayer from 'ol/layer/WebGLVector.js';
+import VectorLayer from 'ol/layer/Vector.js';
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
 import Feature from 'ol/Feature.js';
@@ -52,7 +53,7 @@ export function refreshPointsLayer(map, clusterSource) {
   10,  '#2b83ba',
   50,  '#4aa3c7',
   100, '#3f7fbf',
-  150, '#6c63c7',  // shift into purple instead of yellow
+  150, '#6c63c7',
   200, '#8e44ad',
   250, '#b23a48',
   400, '#d64541',
@@ -84,13 +85,90 @@ export function createMigrationLayer(map, vectorSource) {
   const migrationLayer = new WebGLVectorLayer({
     source: vectorSource,
     style: {
-      'circle-radius': 5,
-      'circle-fill-color': 'rgb(255, 0, 191)', // semi-transparent red for migration points
-      'circle-stroke-color': 'white',
-      'circle-stroke-width': 1
+    'stroke-color': ['get', 'color'], 
+    'stroke-width': ['get', 'width']
     }
   });
 
   migrationLayer.set('id', MIGRATION_LAYER_ID);
+  migrationLayer.setVisible(false);
   map.addLayer(migrationLayer);
+
+  // add click interaction to highlight selected migration route
+  const selectedFeatures = new Set();
+
+  map.on('click', event => {
+
+    let clickedAnyFeature = false;
+
+    map.forEachFeatureAtPixel(event.pixel, feature => {
+      clickedAnyFeature = true;
+
+        // already selected -> deselect
+        if (selectedFeatures.has(feature)) {
+          const baseColor = feature.get('color').slice(0, 3);
+          feature.set('color', [...baseColor, 0.2]);
+          feature.set('width', 1.5);
+          feature.set('selected', false);
+
+          selectedFeatures.delete(feature);
+
+        } else {
+          // newly selected -> highlight
+          const baseColor = feature.get('color').slice(0, 3);
+          feature.set('color', [...baseColor, 1.0]);
+          feature.set('width', 4);
+          feature.set('selected', true);
+
+          selectedFeatures.add(feature);
+        }
+
+        return true;
+      });
+
+      migrationLayer.changed();
+
+      if (!clickedAnyFeature) {
+      // Clear selection if click on empty space
+      selectedFeatures.forEach(feature => {
+        feature.set('opacity', 0.15);
+        feature.set('width', 1.5);
+        feature.set('selected', false);
+      });
+    }
+  });
+}
+
+export function createBirdSpeciesLayer(map, vectorSource) {
+  const labelLayer = new VectorLayer({
+    source: vectorSource,
+    style: feature => {
+
+      if (!feature.get('selected')) {
+        return null; // only label selected feature
+      }
+
+      return new Style({
+        text: new Text({
+          text: feature.get('Bird_species'),
+
+          font: '14px sans-serif',
+
+          fill: new Fill({
+            color: '#fff'
+          }),
+
+          stroke: new Stroke({
+            color: '#000',
+            width: 3
+          }),
+
+          overflow: true,
+          placement: 'line'
+        })
+      });
+    }
+  });
+
+  map.addLayer(labelLayer);
 }

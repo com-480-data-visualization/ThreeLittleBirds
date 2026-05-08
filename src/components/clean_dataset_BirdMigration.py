@@ -5,7 +5,7 @@ input_file = 'public/data/Bird_migration_dataset_renamed.csv'
 output_file = 'public/data/Bird_migration_dataset_renamed_CLEAN.csv'
 
 columns_to_drop = {
-    "ID", "Migratory route codes", "Migration nodes", "Bird orders", "Bird families", "Bird genera", "Bird species", "Species Author", "Migration type", "The IUCN Red List (2023)", "Migration start year", "Migration start month", ",Migration end month", "Sensor types", "CONTINENTS", "Countries", "Provinces", "MIGRATION_PATTERN","Migration_routes", "References", "Publish time", "DOI"
+   "Migration nodes", "Bird orders", "Bird families", "Bird genera", "Bird species","Species Authority", "Migration type", "The IUCN Red List (2023)", "Migration start year", "Migration start month", "Migration end month", "Sensor types", "CONTINENTS", "Countries", "Provinces", "MIGRATION_PATTERN", "Migration_routes", "References", "Publish time", "DOI"
 }
 
 def clean_dataset():
@@ -21,7 +21,7 @@ def clean_dataset():
         try:
             header = next(reader)
         except StopIteration:
-            print("Error: The input file is empty.")
+            print("Error: The input file is empty.")    
             return
 
         # Figure out the indices of the columns we actually want to keep
