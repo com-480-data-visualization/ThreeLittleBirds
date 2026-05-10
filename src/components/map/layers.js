@@ -1,13 +1,6 @@
 import WebGLVectorLayer from 'ol/layer/WebGLVector.js';
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
-import Feature from 'ol/Feature.js';
-
-import CircleStyle from 'ol/style/Circle.js';
-import Fill from 'ol/style/Fill.js';
-import Stroke from 'ol/style/Stroke.js';
-import Style from 'ol/style/Style.js';
-import Text from 'ol/style/Text.js';
 
 export function createBaseLayer() {
   return new TileLayer({
@@ -21,19 +14,9 @@ const POINTS_LAYER_ID = 'pointsLayer';
 export const MIGRATION_LAYER_ID = 'migrationLayer';
 
 export function refreshPointsLayer(map, clusterSource) {
-  let existingLayer = null;
-
-  map.getLayers().forEach(layer => {
-    if (layer.get('id') === POINTS_LAYER_ID) {
-      existingLayer = layer;
-    }
-  });
-
-  if (existingLayer) {
-    existingLayer.setSource(clusterSource);
-    existingLayer.changed(); // ensures re-render if needed
-    return;
-  }
+  map.getLayers().getArray()
+      .filter(layer => layer.get('id') === POINTS_LAYER_ID)
+      .forEach(layer => map.removeLayer(layer));
 
   const pointsLayer = new WebGLVectorLayer({ // use WebGL for better performance with many points, but does not support writing text lables or hover interactions
     source: clusterSource, // check out multi-scale rendering, or adding layer with labels that are only visible at certain zoom levels (zoom dependent styling)

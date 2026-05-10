@@ -172,8 +172,10 @@ export function buildCheckboxPanel(parentEl, onChange) {
 
     panel.appendChild(groupDiv);
   });
-
-  parentEl.appendChild(panel);
+  const target = document.querySelector('.heatmap-controls-wrapper') || parentEl;
+  if (!target.querySelector('.heatmap-controls')) {
+    target.appendChild(panel);
+  }
 
   /** Returns the Set of field keys whose checkbox is currently checked */
   function getActiveKeys() {

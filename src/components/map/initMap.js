@@ -1,12 +1,9 @@
-import * as d3 from "d3";
-
 import { createBaseLayer, refreshPointsLayer, createMigrationLayer } from './layers.js';
 import { clusterSource_from_data, migration_source_from_data } from './dataLoader.js';
 import { fromLonLat } from "ol/proj";
 import Map from 'ol/Map';
 import View from 'ol/View';
 import Attribution from 'ol/control/Attribution';
-import { initial } from "lodash";
 
 export function init_map(data, migration_data, targetId = "primary-vis", layers = [createBaseLayer()], viewConfig = { center: fromLonLat([8.54, 47.37]), zoom: 5 }) {
   const mapContainer = document.getElementById(targetId);
@@ -34,8 +31,20 @@ export function init_map(data, migration_data, targetId = "primary-vis", layers 
     createMigrationLayer(map, vectorSource);
     }
 
-  initializeDataLayer();
-  initializeMigrationLayer();
+    initializeDataLayer();
+    initializeMigrationLayer();
 
-  return map;
+    return {
+        update: async (filteredData) => {
+            const transformed = filteredData.map(d => ({
+                lon: +d.LONGITUDE,
+                lat: +d.LATITUDE,
+                size: +d.SIZE
+            }));
+            const clusterSource = await clusterSource_from_data(transformed);
+            refreshPointsLayer(map, clusterSource);
+            map.render();
+        },
+        getLayers: () => map.getLayers(),
+    };
 }

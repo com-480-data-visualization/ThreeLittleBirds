@@ -4,9 +4,7 @@
    on scroll, lazy-image fade-in.
    ========================================================= */
 import * as d3 from 'd3';
-import './components/sliders.js';
 import './styles/main.css';
-import { create } from 'lodash';
 import { init_visualizations } from './components/init_and_update.js';
 
 (function () {

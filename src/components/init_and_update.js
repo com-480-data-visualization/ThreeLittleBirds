@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 
 import { init_map } from './map/initMap.js';
+import { init_sliders} from './sliders.js';
 import { init_heatmaps } from './heatmap/initHeatmaps.js';
 import { init_barplots } from './barplot/initBarplot.js';
 import { MIGRATION_LAYER_ID } from './map/layers.js';
@@ -15,13 +16,18 @@ const state = {
 
 export async function init_visualizations() {
   // ensure initial render completes before heavy lifting
-  await new Promise(requestAnimationFrame); 
+  await new Promise(requestAnimationFrame);
 
   // fetch data concurrently to reduce loading times
   [state.data, state.migration_data] = await Promise.all([
     d3.csv('data/STRIKE_REPORTS_CLEAN.csv'),
     d3.csv('data/Bird_migration_dataset_renamed_CLEAN.csv')
   ]);
+
+
+  init_sliders(state.data, (filterFn) => {
+    update_visualizations(filterFn);
+  });
 
   const map_worker = new Worker(
     new URL('./workers/map_worker.js', import.meta.url),
@@ -32,17 +38,17 @@ export async function init_visualizations() {
 
   map_worker.onmessage = (e) => {
     const features = e.data;
-    
+
     // remove all loader overlays from the dom
     document.querySelectorAll('.vis-loader').forEach(el => el.remove());
 
     state.map = init_map(features, state.migration_data);
-    state.heatmaps = init_heatmaps(state.data); 
-    state.barplots = init_barplots(state.data); 
+    state.heatmaps = init_heatmaps(state.data);
+    state.barplots = init_barplots(state.data);
   };
 
   // toggle layer visibility based on checkbox state
-  document.getElementById('toggleMigration').addEventListener('change', (e) => { 
+  document.getElementById('toggleMigration').addEventListener('change', (e) => {
     const layer = state.map.getLayers().getArray()
       .find(l => l.get('id') === MIGRATION_LAYER_ID);
 
@@ -65,11 +71,12 @@ export async function init_visualizations() {
 }
 
 export function update_visualizations(filterFn) {
-  const filtered = state.data.filter(filterFn);
-
-  state.map.update(filtered);
-  state.heatmaps.update(filtered);
-  state.barplots.update(filtered);
-
   if (!state.data) return;
+  const filtered = state.data.filter(filterFn);
+  console.log('Filtered rows:', filtered.length);
+
+
+  if (state.map?.update)      state.map.update(filtered);
+  if (state.heatmaps?.update) state.heatmaps.update(filtered);
+  if (state.barplots?.update) state.barplots.update(filtered);
 }

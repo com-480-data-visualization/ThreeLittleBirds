@@ -39,27 +39,27 @@ const heatmapConfigs = {
 const initializedHeatmaps = new Set();
 
 export function init_heatmaps(data) {
-    initTabs(); // Ensure tabs are initialized before setting up heatmaps
+  let currentData = data;
+  initTabs();
 
     // Helper to render a specific tab's heatmap
     function renderHeatmapForTab(tabId) {
       const config = heatmapConfigs[tabId];
+      if (!config) return;
 
-      // Only proceed if we have a config for this tab and it hasn't been loaded yet
-      if (config && !initializedHeatmaps.has(tabId)) {
-        createHeatmap({
-          containerId: `#${tabId}`,
-          svgPath: config.svgPath,
-          acClass: config.acClass,
-          parts: config.parts,
-          data: data
-        });
+      // always re-render with new data, remove initialized guard for updates
+      createHeatmap({
+        containerId: `#${tabId}`,
+        svgPath: config.svgPath,
+        acClass: config.acClass,
+        parts: config.parts,
+        data: currentData
+      });
         
         // Mark as initialized
         initializedHeatmaps.add(tabId);
         console.log(`Heatmap initialized for: ${tabId}`);
       }
-    }
 
     // Add Event Listeners to radio buttons
     const radioInputs = document.querySelectorAll('input[name="aircraft-tab"]');
@@ -76,5 +76,13 @@ export function init_heatmaps(data) {
     if (checkedRadio) {
       renderHeatmapForTab(checkedRadio.getAttribute('data-target'));
     }
-
+  return {
+    update: (filteredData) => {
+      currentData = filteredData;
+      const activeTab = document.querySelector('input[name="aircraft-tab"]:checked');
+      if (activeTab) {
+        renderHeatmapForTab(activeTab.getAttribute('data-target'), currentData);
+      }
+    }
+  };
 }

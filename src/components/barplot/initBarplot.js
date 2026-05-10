@@ -24,6 +24,12 @@ export function init_barplots(data) {
     });
 
     update(data);
+    return {
+        update: (filteredData) => {
+            filteredData.forEach(d => { d.year = +d["INCIDENT_YEAR"]; });
+            update(filteredData);
+        }
+    };
 }
 
 function update(data) {
