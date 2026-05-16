@@ -13,10 +13,18 @@ export function getSliderFilter() {
     return function (d) {
 
         const year = +d.INCIDENT_YEAR;
-        if (year <= sliderState.year.min || year >= sliderState.year.max) return false;
+        if (sliderState.year.min === sliderState.year.max) {
+            if (year !== sliderState.year.min) return false;
+        } else {
+            if (year <= sliderState.year.min || year >= sliderState.year.max) return false;
+        }
 
         const alt = +d.HEIGHT;
-        if (alt <= sliderState.altitude.min || alt >= sliderState.altitude.max) return false;
+        if (sliderState.altitude.min === sliderState.altitude.max) {
+            if (alt !== sliderState.altitude.min) return false;
+        } else {
+            if (alt <= sliderState.altitude.min || alt >= sliderState.altitude.max) return false;
+        }
 
         const month = +d.INCIDENT_MONTH;
         const { min: mMin, max: mMax } = sliderState.month;

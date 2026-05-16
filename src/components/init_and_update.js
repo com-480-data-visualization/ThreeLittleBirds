@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import { init_map } from './map/initMap.js';
 import { init_sliders} from './sliders.js';
 import { init_heatmaps } from './heatmap/initHeatmaps.js';
-import { init_barplots } from './barplot/initBarplot.js';
+import { init_barplot } from './barplot/initBarplot.js';
 import { MIGRATION_LAYER_ID } from './map/layers.js';
 
 const state = {
@@ -44,7 +44,7 @@ export async function init_visualizations() {
 
     state.map = init_map(features, state.migration_data);
     state.heatmaps = init_heatmaps(state.data);
-    state.barplots = init_barplots(state.data);
+    state.barplots = init_barplot(state.data);
   };
 
   // toggle layer visibility based on checkbox state
